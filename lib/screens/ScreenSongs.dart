@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:musico_scratch/custom/listOfSongs.dart';
 import 'package:musico_scratch/custom/musicList.dart';
 
-class PageSongs extends StatelessWidget {
-  PageSongs({Key? key}) : super(key: key);
+class ScreenSongs extends StatelessWidget {
+  ScreenSongs({Key? key}) : super(key: key);
  
 
   @override

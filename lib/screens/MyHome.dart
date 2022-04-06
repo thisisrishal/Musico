@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:musico_scratch/custom/customTexts.dart';
-import 'package:musico_scratch/pages/PageSongs.dart';
+import 'package:musico_scratch/screens/ScreenAlbums.dart';
+import 'package:musico_scratch/screens/ScreenArtists.dart';
+import 'package:musico_scratch/screens/ScreenPlaylists.dart';
+import 'package:musico_scratch/screens/ScreenSongs.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({Key? key}) : super(key: key);
@@ -54,10 +57,10 @@ class _MyHomeState extends State<MyHome> with TickerProviderStateMixin {
           child: TabBarView(
             controller: _tabController,
             children: [
-              PageSongs(),
-              PageSongs(),
-              PageSongs(),
-              PageSongs(),
+              ScreenSongs(),
+              ScreenArtists(),
+              ScreenAlbums(),
+              ScreenPlaylists(),
             ],
           ),
         ),

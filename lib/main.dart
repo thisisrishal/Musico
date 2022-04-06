@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:musico_scratch/pages/MyHome.dart';
+import 'package:musico_scratch/screens/MyHome.dart';
 
 void main() {
   runApp(const Musico());

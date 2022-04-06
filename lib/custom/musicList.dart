@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:musico_scratch/custom/listOfSongs.dart';
-
-import '../openAssetAudio/openAssetAudio.dart';
-import '../pages/NowPlaying.dart';
+import 'package:musico_scratch/screens/NowPlaying.dart';
 
 class MusicList extends StatelessWidget {
   String imageurl;
