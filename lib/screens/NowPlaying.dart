@@ -28,16 +28,14 @@ class NowPlaying extends StatefulWidget {
 }
 
 class _NowPlayingState extends State<NowPlaying> {
-  var assetsAudioPlayer = AssetsAudioPlayer();
+  final assetsAudioPlayer = AssetsAudioPlayer();
   final List<StreamSubscription> subscription = [];
-
-  
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    assetsAudioPlayer = AssetsAudioPlayer.newPlayer();
+    // assetsAudioPlayer = AssetsAudioPlayer.newPlayer();
     subscription.add(assetsAudioPlayer.playlistAudioFinished.listen((data) {
       //print('playlistAudioFinished :$data');
     }));
@@ -52,7 +50,7 @@ class _NowPlayingState extends State<NowPlaying> {
       Playlist(audios: audios, startIndex: widget.index),
       showNotification: true,
       autoStart: true,
-      //loopMode: LoopMode.playlist,
+      loopMode: LoopMode.playlist,
       playInBackground: PlayInBackground.enabled,
     );
   }
@@ -93,7 +91,7 @@ class _NowPlayingState extends State<NowPlaying> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(colors: [
             Color.fromARGB(255, 24, 3, 18),
-            Color.fromRGBO(21, 154, 211, 1)
+            Color.fromARGB(255, 130, 134, 135)
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
         ),
         child: Column(
@@ -168,8 +166,8 @@ class _NowPlayingState extends State<NowPlaying> {
                                   onPressed: () {
                                     assetsAudioPlayer.previous();
                                     setState(() {
-                                      playbtn = Icons.pause_circle_sharp;
-                                      isplaying = false;
+                                      // playbtn = Icons.pause_circle_outline;
+                                      // isplaying = false;
                                     });
                                   },
                                   icon: const Icon(
@@ -184,21 +182,20 @@ class _NowPlayingState extends State<NowPlaying> {
                                 ),
                                 IconButton(
                                   onPressed: () {
-                                    
-                                      if (isplaying != true) {
-                                        setState(() {
-                                          playbtn =
-                                              Icons.play_circle_filled_sharp;
-                                          isplaying = true;
-                                          assetsAudioPlayer.playOrPause();
-                                        });
-                                      } else {
-                                        setState(() {
-                                          playbtn = Icons.pause_circle_sharp;
-                                          isplaying = false;
-                                          assetsAudioPlayer.playOrPause();
-                                        });
-                                      }
+                                    if (isplaying != true) {
+                                      setState(() {
+                                        playbtn =
+                                            Icons.play_circle_filled_outlined;
+                                        isplaying = true;
+                                        assetsAudioPlayer.playOrPause();
+                                      });
+                                    } else {
+                                      setState(() {
+                                        playbtn = Icons.pause_circle_outlined;
+                                        isplaying = false;
+                                        assetsAudioPlayer.playOrPause();
+                                      });
+                                    }
                                   },
                                   icon: Icon(
                                     playbtn,
@@ -214,7 +211,8 @@ class _NowPlayingState extends State<NowPlaying> {
                                   onPressed: () {
                                     assetsAudioPlayer.next();
                                     setState(() {
-                                      playbtn = Icons.pause_circle_sharp;
+                                      playbtn = Icons.pause_circle_outlined
+                                      ;
                                       isplaying = false;
                                     });
                                   },

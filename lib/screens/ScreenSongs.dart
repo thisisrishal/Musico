@@ -24,6 +24,7 @@ class ScreenSongs extends StatelessWidget {
                   itemCount: audios.length,
                   itemBuilder: (BuildContext context, int index) {
                     return MusicList(
+                      index: index,
                       
                       header: 
                         audios[index].metas.title.toString(),
