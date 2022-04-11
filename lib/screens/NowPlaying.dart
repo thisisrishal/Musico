@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
@@ -29,19 +28,19 @@ class NowPlaying extends StatefulWidget {
 
 class _NowPlayingState extends State<NowPlaying> {
   final assetsAudioPlayer = AssetsAudioPlayer();
-  final List<StreamSubscription> subscription = [];
+  // final List<StreamSubscription> subscription = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     // assetsAudioPlayer = AssetsAudioPlayer.newPlayer();
-    subscription.add(assetsAudioPlayer.playlistAudioFinished.listen((data) {
+    // subscription.add(assetsAudioPlayer.playlistAudioFinished.listen((data) {
       //print('playlistAudioFinished :$data');
-    }));
-    subscription.add(assetsAudioPlayer.audioSessionId.listen((sessionId) {
+    // }));
+    // subscription.add(assetsAudioPlayer.audioSessionId.listen((sessionId) {
       //print('audioSessionId : $sessionId');
-    }));
+    // }));
     openPlayer();
   }
 
@@ -56,7 +55,7 @@ class _NowPlayingState extends State<NowPlaying> {
   }
 
   Audio find(List<Audio> source, String fromPath) {
-    return source.firstWhere((element) => element.path == fromPath);
+    return source.firstWhere((element) => element.path == fromPath); //assertion
   }
 
   bool isplaying = false;
