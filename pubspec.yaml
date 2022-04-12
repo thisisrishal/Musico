@@ -32,9 +32,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
-  flutter_file_manager: ^0.2.0
-  path: ^1.8.1
+  on_audio_query: ^2.6.0
+  path: ^1.8.0
   path_provider_ex: ^1.0.1
+  permission_handler: ^9.2.0
 
 dev_dependencies:
   flutter_test:
