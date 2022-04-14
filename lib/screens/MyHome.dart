@@ -4,7 +4,6 @@ import 'package:musico_scratch/screens/ScreenAlbums.dart';
 import 'package:musico_scratch/screens/ScreenArtists.dart';
 import 'package:musico_scratch/screens/ScreenPlaylists.dart';
 import 'package:musico_scratch/screens/ScreenSongHome.dart';
-import 'package:musico_scratch/screens/ScreenSongs.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class MyHome extends StatefulWidget {
@@ -27,6 +26,7 @@ class _MyHomeState extends State<MyHome> with TickerProviderStateMixin {
 
     requestPermission();
   }
+
 
   void requestPermission() async {
     var requestStatus = await Permission.storage.status;

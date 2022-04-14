@@ -32,14 +32,23 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  font_awesome_flutter: ^10.1.0
+  hive: ^2.1.0
+  hive_flutter: ^1.1.0
+  marquee: ^2.2.1
   on_audio_query: ^2.6.0
   path: ^1.8.0
   path_provider_ex: ^1.0.1
   permission_handler: ^9.2.0
 
 dev_dependencies:
+
+  # hive database generators
+  build_runner: ^2.1.8
   flutter_test:
     sdk: flutter
+  hive_generator: ^1.1.2
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.
@@ -62,6 +71,7 @@ flutter:
     - assets/images/Bille_Ilish.jpg
     - assets/images/eminem.jpg
     - assets/images/sidsriram.jpg
+    - assets/images/muzify.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
