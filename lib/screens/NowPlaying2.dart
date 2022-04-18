@@ -3,8 +3,6 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 
 class NowPlaying2 extends StatefulWidget {
   int index;
@@ -39,17 +37,17 @@ class _NowPlayingState extends State<NowPlaying2> {
 
   void openPlayer() async {
     await assetsAudioPlayer.open(
-      Playlist(audios: widget.allSongs, startIndex: widget.index),
-      showNotification: true,
-      autoStart: true,
-      // loopMode: LoopMode.playlist,
-      playInBackground: PlayInBackground.enabled,
-    );
+        Playlist(audios: widget.allSongs, startIndex: widget.index),
+        showNotification: true,
+        autoStart: true,
+        // loopMode: LoopMode.playlist,
+        playInBackground: PlayInBackground.enabled,
+        notificationSettings: NotificationSettings(stopEnabled: false));
   }
 
   Audio find(List<Audio> source, String fromPath) {
     return source.firstWhere((element) {
-      print('---------------------------${fromPath}---');
+      // print('---------------------------${fromPath}---');
 
       return element.path == fromPath;
     });
@@ -99,6 +97,8 @@ class _NowPlayingState extends State<NowPlaying2> {
                 if (playing.data != null) {
                   final myaudio =
                       find(widget.allSongs, playing.data!.audio.assetAudioPath);
+                  // print('----ddddddd----${myaudio.metas.extra}-----dddddddd--');
+
                   return Column(
                     children: [
                       Padding(
@@ -110,7 +110,7 @@ class _NowPlayingState extends State<NowPlaying2> {
                               //color: Color.fromARGB(96, 0, 0, 0),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(0))),
-                          child:  QueryArtworkWidget(
+                          child: QueryArtworkWidget(
                             // artworkClipBehavior: Clip.antiAliasWithSaveLayer,
                             artworkFit: BoxFit.fill,
                             nullArtworkWidget:
@@ -118,8 +118,6 @@ class _NowPlayingState extends State<NowPlaying2> {
                             id: int.parse(myaudio.metas.id!),
                             type: ArtworkType.AUDIO,
                           ),
-                          
-
 
                           // myaudio.metas.image?.path == null
                           //     ? const SizedBox()
@@ -144,12 +142,11 @@ class _NowPlayingState extends State<NowPlaying2> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                         
                           SizedBox(
                             height: 30,
                             width: 250,
-                            child: Marquee(text:
-                              "${myaudio.metas.title}",
+                            child: Marquee(
+                              text: "${myaudio.metas.title}",
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 25.0,
@@ -193,47 +190,49 @@ class _NowPlayingState extends State<NowPlaying2> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.08,
                                 ),
-                                // PlayerBuilder.isPlaying(
-                                //   player: player,
-                                //   builder: (context, isPlaying) {
-                                //     return IconButton(
-                                //       iconSize: 50,
-                                //       onPressed: () async {
-                                //         await player.playOrPause();
-                                //       },
-                                //       icon: Icon(
-                                //         isPlaying
-                                //             ? FontAwesomeIcons.pause
-                                //             : FontAwesomeIcons.play,
-                                //       ),
-                                //     );
-                                //   },
-                                // ),
-                                
-                                GestureDetector(
-                                  onTap: () {
-                                    if (isplaying != true) {
-                                      setState(() {
-                                        playbtn =
-                                            Icons.play_circle_filled_outlined;
-                                        isplaying = true;
-                                        assetsAudioPlayer.playOrPause();
-                                      });
-                                    } else {
-                                      setState(() {
-                                        playbtn = Icons.pause_circle_outlined;
-                                        isplaying = false;
-                                        assetsAudioPlayer.playOrPause();
-                                      });
-                                    }
+                                PlayerBuilder.isPlaying(
+                                  player: assetsAudioPlayer,
+                                  builder: (context, isplaying) {
+                                    return IconButton(
+                                      iconSize: 50,
+                                      onPressed: () async {
+                                        await assetsAudioPlayer.playOrPause();
+                                      },
+                                      icon: Icon(
+                                        isplaying
+                                            ? playbtn =
+                                                Icons.pause_circle_outlined
+                                            : playbtn = Icons
+                                                .play_circle_filled_outlined,
+                                      ),
+                                    );
                                   },
-
-                                  child: Icon(
-                                    playbtn,
-                                    size: 60,
-                                    color: Colors.white,
-                                  ),
                                 ),
+
+                                // GestureDetector(
+                                //   onTap: () {
+                                //     if (isplaying != true) {
+                                //       setState(() {
+                                //         playbtn =
+                                //             Icons.play_circle_filled_outlined;
+                                //         isplaying = true;
+                                //         assetsAudioPlayer.playOrPause();
+                                //       });
+                                //     } else {
+                                //       setState(() {
+                                //         playbtn = Icons.pause_circle_outlined;
+                                //         isplaying = false;
+                                //         assetsAudioPlayer.playOrPause();
+                                //       });
+                                //     }
+                                //   },
+
+                                //   child: Icon(
+                                //     playbtn,
+                                //     size: 60,
+                                //     color: Colors.white,
+                                //   ),
+                                // ),
                                 SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * 0.09,

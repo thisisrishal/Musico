@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musico_scratch/custom/createPlaylistDialogue.dart';
 import 'package:musico_scratch/custom/listOfPlaylist.dart';
 
 class ScreenPlaylists extends StatelessWidget {
@@ -27,20 +28,31 @@ class ScreenPlaylists extends StatelessWidget {
                   leadingColor: Color(0xffba9e84),
                   title: 'Recently Played',
                 ),
-                listofPlaylists(
-                  title: 'Playlist 1',
-                ),
-                listofPlaylists(
-                  leadingColor: Color(0xff3d3d3d),
-                  title: 'Playlist 2',
-                ),
+                Expanded(
+                    child: Column(
+                  children: [
+                    listofPlaylists(
+                      title: 'Playlist 1',
+                    ),
+                    listofPlaylists(
+                      leadingColor: Color(0xff3d3d3d),
+                      title: 'Playlist 2',
+                    ),
+                  ],
+                ))
               ],
             ),
             Positioned(
                 right: 10,
                 bottom: 60,
                 child: FloatingActionButton(
-                  onPressed: () {},
+
+                  // show dialogue box
+
+                  onPressed: () => showDialog(
+                    context: context,
+                    builder: (context) => createPlaylistDialogue(),
+                  ),
                   child: Icon(Icons.add),
                 ))
           ],

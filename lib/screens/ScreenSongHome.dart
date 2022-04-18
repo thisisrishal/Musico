@@ -45,7 +45,9 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
           ignoreCase: true,
         ),
         builder: (context, item) {
-          // here item is the index one_by_one song get here
+          // print('--------------{$context  } ------${item} ---------');
+
+          // here item is the index one_by_one song get her1
 
           if (item.data == null) {
             // Data is the last value/song get in item
@@ -85,9 +87,10 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
                   // artworkClipBehavior: Clip.antiAliasWithSaveLayer,
                   artworkFit: BoxFit.fill,
                   nullArtworkWidget: Container(
-                      
-                      
-                      child: Image.asset('assets/images/muzify.png',color: Colors.white30,)),
+                      child: Image.asset(
+                    'assets/images/muzify.png',
+                    color: Colors.white30,
+                  )),
                   id: int.parse(allSongs[index].id.toString()),
                   type: ArtworkType.AUDIO,
                 ),
@@ -98,9 +101,12 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
                 height: 40,
                 child: Text(
                   recievedDatabaseSongs[index].title.toString(),
+
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
+                
+
               ), // check display name also
               subtitle: Text(
                 "${recievedDatabaseSongs[index].artist}",
@@ -143,7 +149,7 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
         )
         .toList();
 
-    // print('-----------------${mappedSongs}');
+    // print('-----------------${mappedSongs[1].title}');
 
     await box.put('musics', mappedSongs);
     recievedDatabaseSongs = box.get('musics') as List<dbSongs>;
