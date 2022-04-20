@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musico_scratch/database/dbSongs.dart';
 
 class createPlaylistDialogue extends StatefulWidget {
   const createPlaylistDialogue({Key? key}) : super(key: key);
@@ -8,9 +9,17 @@ class createPlaylistDialogue extends StatefulWidget {
 }
 
 class _createPlaylistDialogueState extends State<createPlaylistDialogue> {
-  var ListPlaylistNames = [];
-  var textfieldController = TextEditingController();
-  String? playlistName;
+  List<dbSongs> playlists = [];
+
+  final box = MusicBox.getInstance();
+
+  String? title;
+
+  final formkey = GlobalKey<FormState>();
+
+  // var ListplaylistTitles = [];
+  // var textfieldController = TextEditingController();
+  String? playlistTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -46,13 +55,17 @@ class _createPlaylistDialogueState extends State<createPlaylistDialogue> {
             //creating a text filed
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: TextFormField(
-                controller: textfieldController,
-                onChanged: (value) {
-                  playlistName = value.trim();
-                },
-                style: TextStyle(
-                  color: Colors.black,
+              child: Form(
+                key: formkey,
+                child: TextFormField(
+                  // controller: textfieldController,
+                  onChanged: (value) {
+                    //getname
+                    playlistTitle = value.trim();
+                  },
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
@@ -73,15 +86,18 @@ class _createPlaylistDialogueState extends State<createPlaylistDialogue> {
                   // ),
                   ElevatedButton(
                     onPressed: () {
-                     
-                      
-                    print('----------------${ListPlaylistNames}-------------');
+                      box.put(playlistTitle, playlists);
+                      // print('----------${playlistTitle}--------------');
+                      Navigator.pop(context);
+                      setState(() {});
+                      // print('----------------${ListplaylistTitles}-------------');
                       // return Navigator.pop(context);
                     },
                     child: Text("save"),
                     style: ElevatedButton.styleFrom(
-                        primary: Colors.grey,
-                        visualDensity: VisualDensity(horizontal: 3.5)),
+                      primary: Colors.grey,
+                      visualDensity: VisualDensity(horizontal: 3.5),
+                    ),
                   )
                 ],
               ),
@@ -89,9 +105,6 @@ class _createPlaylistDialogueState extends State<createPlaylistDialogue> {
           ],
         ),
       ),
-      
     );
-    
-
   }
 }

@@ -1,6 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
+import 'package:musico_scratch/custom/customBottomSheet.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
 import 'package:musico_scratch/screens/NowPlaying2.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -23,11 +24,11 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
 
   final _audioQuery = new OnAudioQuery();
 
-  List<SongModel> fetchedSongs = [];
-  List<SongModel> allSongs = [];
-  List<dbSongs> mappedSongs = [];
-  List<dbSongs> recievedDatabaseSongs = [];
-  List<Audio> databaseAudioList = [];
+  // List<SongModel> fetchedSongs = [];
+  // List<SongModel> allSongs = [];
+  // List<dbSongs> mappedSongs = [];
+  // List<dbSongs> recievedDatabaseSongs = [];
+  // List<Audio> databaseAudioList = [];
 
   final box = MusicBox.getInstance(); //check
 
@@ -114,7 +115,9 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
                 overflow: TextOverflow.ellipsis,
               ),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: (){
+                  return bottomSheet(context);
+                },
                 icon: Icon(Icons.more_horiz_rounded),
                 color: Colors.white,
               ),
@@ -149,7 +152,7 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
         )
         .toList();
 
-    // print('-----------------${mappedSongs[1].title}');
+    print('-----------------${allSongs}');
 
     await box.put('musics', mappedSongs);
     recievedDatabaseSongs = box.get('musics') as List<dbSongs>;
@@ -166,3 +169,11 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
     setState(() {});
   }
 }
+
+
+List<SongModel> fetchedSongs = [];
+List<SongModel> allSongs = [];
+List<dbSongs> mappedSongs = [];
+List<dbSongs> recievedDatabaseSongs = [];
+List<Audio> databaseAudioList = [];
+

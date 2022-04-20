@@ -4,9 +4,10 @@ class listofPlaylists extends StatelessWidget {
   final String title;
   Icon? leadingIcon;
   Color? leadingColor;
+  Widget? trailingWidget;
 
   listofPlaylists(
-      {Key? key, required this.title, this.leadingIcon, this.leadingColor})
+      {Key? key, required this.title, this.leadingIcon, this.leadingColor, this.trailingWidget})
       : super(key: key);
 
   @override
@@ -32,7 +33,7 @@ class listofPlaylists extends StatelessWidget {
           fontWeight: FontWeight.w600,
         ),
       ),
-      trailing: Icon(
+      trailing: trailingWidget ??= Icon(
         Icons.navigate_next,
         color: Colors.white,
       ),
