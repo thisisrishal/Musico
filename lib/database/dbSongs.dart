@@ -29,7 +29,9 @@ class dbSongs extends HiveObject {  // hiveObject for save & delete
   
 }
 
+
 String boxname = "songs";
+String boxname1 = "rrr";
 
 
 class MusicBox {
@@ -37,5 +39,14 @@ class MusicBox {
 
   static Box<List> getInstance() {
     return _box ??= Hive.box(boxname);
+  }
+}
+
+
+class MusicBox1 {
+  static Box<List>? _box1;
+
+  static Box<List> getInstance() {
+    return _box1 ??= Hive.box(boxname1);
   }
 }

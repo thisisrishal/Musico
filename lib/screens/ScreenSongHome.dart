@@ -151,8 +151,7 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
           ),
         )
         .toList();
-
-    print('-----------------${allSongs}');
+    
 
     await box.put('musics', mappedSongs);
     recievedDatabaseSongs = box.get('musics') as List<dbSongs>;

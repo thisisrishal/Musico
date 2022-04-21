@@ -14,7 +14,8 @@ class ScreenPlaylists extends StatefulWidget {
 }
 
 class _ScreenPlaylistsState extends State<ScreenPlaylists> {
-  final box = MusicBox.getInstance();
+  // final box = MusicBox.getInstance();
+  final box1 = MusicBox1.getInstance();
   List playlists = [];
   String? playlistName = '';
 
@@ -32,7 +33,9 @@ class _ScreenPlaylistsState extends State<ScreenPlaylists> {
         child: IconButton(
           icon: Icon(Icons.add),
           color: Colors.white,
-          onPressed: () => showDialog(
+          onPressed: () => 
+          showDialog(
+            
             context: context,
             builder: (context) => createPlaylistDialogue(),
           ),
@@ -57,8 +60,9 @@ class _ScreenPlaylistsState extends State<ScreenPlaylists> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          print(
-                              '------------${playlists[0].toString()}----------------');
+                          // print('-------box-------${box.keys}-------');
+
+                          print('--------box1--------${box1.keys}-------');
                         },
                         child: listofPlaylists(
                           leadingIcon: Icon(Icons.watch_later),
@@ -71,9 +75,9 @@ class _ScreenPlaylistsState extends State<ScreenPlaylists> {
                 ),
                 Expanded(
                   child: ValueListenableBuilder(
-                    valueListenable: box.listenable(),
+                    valueListenable: box1.listenable(),
                     builder: (context, boxes, _) {
-                      playlists = box.keys.toList();
+                      playlists = box1.keys.toList();
 
                       return ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
@@ -84,7 +88,7 @@ class _ScreenPlaylistsState extends State<ScreenPlaylists> {
                             onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: ((context) => PlaylistSongs(  index: index, playlists:playlists,)),
+                                builder: ((context) => PlaylistSongs(  playListName: playlists[index], playlists:playlists)),
                               ),
                             ),
                             child: listofPlaylists(
@@ -115,16 +119,16 @@ class _ScreenPlaylistsState extends State<ScreenPlaylists> {
                                      showDialog(
                                       context: context,
                                       builder: (context) => editPlaylist(
-                                        playlistName: playlists[index],
+                                        playlistName: playlists[index], 
                                       ),
                                     );
                                     editPlaylist(playlistName: playlists[index],);
                                   }
 
                                   if (value == 2) {
-                                    box.delete(playlists[index]);
+                                    box1.delete(playlists[index]);
                                     setState(() {
-                                      playlists = box.keys.toList();
+                                      playlists = box1.keys.toList();
                                     });
                                   }
                                 },

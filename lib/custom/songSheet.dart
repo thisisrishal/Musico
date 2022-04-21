@@ -1,35 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:musico_scratch/database/dbSongs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-import '../screens/NowPlaying2.dart';
+import '../database/dbSongs.dart';
+import '../screens/PlaylistSongs.dart';
 import '../screens/ScreenSongHome.dart';
 
-class songSheet extends StatefulWidget {
-  String playlistName;
-  songSheet({Key? key, required this.playlistName}) : super(key: key);
+bool? rebuild;
+
+class BottomSheetWidget extends StatefulWidget {
+  final String? playListName;
+  BottomSheetWidget({Key? key, this.playListName}) : super(key: key);
 
   @override
-  State<songSheet> createState() => _songSheetState();
+  State<BottomSheetWidget> createState() => _BottomSheetWidgetState();
 }
 
-class _songSheetState extends State<songSheet> {
-  @override
+class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   final box = MusicBox.getInstance();
-
-  List<dbSongs> SongsList = []; //get from the database
-  List<dbSongs> playlistSongs = [];
-  @override
-  void initState() {
-    super.initState();
-    fullSongs();
-  }
+  final box1 = MusicBox1.getInstance();
 
   fullSongs() {
     SongsList = box.get("musics") as List<dbSongs>;
-    playlistSongs = box.get(widget.playlistName)!.cast<dbSongs>();
+    playlistSongs = box1.get(widget.playListName)!.cast<dbSongs>();
   }
 
+  @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) => ListTile(
@@ -79,39 +74,71 @@ class _songSheetState extends State<songSheet> {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        trailing: IconButton(
-          onPressed: () {
-            
-            print(index);
-            // return bottomSheet(context);
-          },
-          icon: Icon(Icons.more_horiz_rounded),
-          color: Colors.white,
-        ),
+        trailing: playlistSongs
+                .where((element) =>
+                    element.id.toString() == SongsList[index].id.toString())
+                .isEmpty
+            ? IconButton(
+                onPressed: () async {
+                  playlistSongs.add(SongsList[index]);
+                  await box.put(widget.playListName, playlistSongs);
+
+                  setState(() {});
+                },
+                icon: const Icon(Icons.add))
+            : IconButton(
+                onPressed: () async {
+                  playlistSongs.removeWhere((elemet) =>
+                      elemet.id.toString() == SongsList[index].id.toString());
+
+                  await box.put(widget.playListName, playlistSongs);
+                  setState(() {});
+                },
+                icon: const Icon(Icons.check_box),
+              ),
+
+        //  InkWell(
+        //     onTap: (() {
+
+        //         tick = true;
+        //       setState(() {
+
+        //       });
+
+        //     }),
+        //     child: tick == true
+        //         ? Container(
+        //             height: 30,
+        //             width: 30,
+        //             color: Colors.red,
+        //           )
+        //         : Container(
+        //             height: 30,
+        //             width: 30,
+        //             color: Colors.green,
+        //           )),
+
+        //     IconButton(
+        //   onPressed: () {
+        //     print(SongsList[index]);
+
+        //     playlistSongs.add(SongsList[index]);
+
+        //      setState(() {});
+        //     // Navigator.push(
+        //     //     context,
+        //     //     MaterialPageRoute(
+        //     //         builder: (context) => PlaylistSongs(
+        //     //               songIndex: index,
+        //     //             )));
+        //     print(index);
+        //     // return bottomSheet(context);
+        //   },
+        //   icon: Icon(Icons.more_horiz_rounded),
+        //   color: Colors.white,
+        // ),
       ),
       itemCount: recievedDatabaseSongs.length,
     );
   }
 }
-
-
-
-
-
-
-// showModalBottomSheet(
-//                       shape: RoundedRectangleBorder(
-//                           borderRadius: BorderRadius.circular(21)),
-//                       backgroundColor: Color.fromARGB(255, 48, 48, 48),
-//                       context: context,
-//                       builder: (context) {
-//                         return ListView.builder(
-//                           itemCount: databaseSongs.length,
-//                           itemBuilder: (context, index1) {
-//                             return
-
-//                           },
-//                         );
-//                       });
-
-// final box = MusicBox.getInstance();

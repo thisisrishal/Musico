@@ -9,6 +9,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(dbSongsAdapter());
   await Hive.openBox<List>(boxname);
+  await Hive.openBox<List>(boxname1);
   runApp(const Musico());
 }
 
