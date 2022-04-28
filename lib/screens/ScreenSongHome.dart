@@ -1,13 +1,14 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
-import 'package:marquee/marquee.dart';
-import 'package:musico_scratch/custom/customBottomSheet.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
+import 'package:musico_scratch/moved/MusicListMenu.dart';
 import 'package:musico_scratch/screens/NowPlaying2.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class ScreenSongHome extends StatefulWidget {
   ScreenSongHome({Key? key}) : super(key: key);
+
+  get fullSongs => null;
 
   @override
   State<ScreenSongHome> createState() => _ScreenSongHomeState();
@@ -16,19 +17,26 @@ class ScreenSongHome extends StatefulWidget {
 class _ScreenSongHomeState extends State<ScreenSongHome> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
-    fetchsongs();
+    // fetchsongs();
+    // fetchArtist();
+    // fetchAllFavourites();
+    // accessPath();
   }
 
   final _audioQuery = new OnAudioQuery();
+  // void fetchArtist() async {
+  //   List<ArtistModel> fetchallArtists = await _audioQuery.queryArtists();
+  //   for (var song in fetchallArtists) {
+  //     // print('{=====================${song}===================}');
+  //     if (song.artist != '<unknown>') {
+  //       allArtistsSet.add(song);
+  //     }
+  //   }
 
-  // List<SongModel> fetchedSongs = [];
-  // List<SongModel> allSongs = [];
-  // List<dbSongs> mappedSongs = [];
-  // List<dbSongs> recievedDatabaseSongs = [];
-  // List<Audio> databaseAudioList = [];
+  //   // box.put('artists', value);
+  // }
 
   final box = MusicBox.getInstance(); //check
 
@@ -65,12 +73,16 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
           return ListView.builder(
             itemBuilder: (context, index) => ListTile(
               onTap: () {
+               
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: ((context) {
                       return NowPlaying2(
-                          index: index, allSongs: databaseAudioList);
+                        index: index,
+                        allSongs: databaseAudioList,
+                        songId: allSongs[index].id.toString(),
+                      );
                     }),
                   ),
                 );
@@ -99,28 +111,34 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
 
               title: SizedBox(
                 width: 200,
-                height: 40,
+                // height: 40,
                 child: Text(
                   recievedDatabaseSongs[index].title.toString(),
-
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                
-
               ), // check display name also
               subtitle: Text(
                 "${recievedDatabaseSongs[index].artist}",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-              trailing: IconButton(
-                onPressed: (){
-                  return bottomSheet(context);
-                },
-                icon: Icon(Icons.more_horiz_rounded),
-                color: Colors.white,
+              trailing: MusicListMenu(
+                songId: databaseAudioList[index].metas.id.toString(),
+                index: index,
               ),
+
+              //  MusicListMenu(
+              //               songId: widget.fullSongs[index].metas.id.toString(),
+              //             ),
+
+              // IconButton(
+              // onPressed: (){
+              //   return bottomSheethomePage(context,index);
+              // },
+              // icon: Icon(Icons.more_horiz_rounded),
+              // color: Colors.white,
+              // ),
             ),
             itemCount: recievedDatabaseSongs.length,
           );
@@ -129,50 +147,66 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
     );
   }
 
-  fetchsongs() async {
-    fetchedSongs = await _audioQuery.querySongs();
+  // fetchsongs() async {
+  //   fetchedSongs = await _audioQuery.querySongs();
+   
 
-    for (var song in fetchedSongs) {
-      if (song.fileExtension == 'mp3') {
-        allSongs.add(song);
-      }
-      // return allSongs;
-    }
+  //   for (var song in fetchedSongs) {
+  //     if (song.fileExtension == 'mp3') {
+  //       allSongs.add(song);
+  //     }
+  //     // return allSongs;
+  //   }
 
-    // get all the item in dbSongs as a key
-    mappedSongs = allSongs
-        .map(
-          (audio) => dbSongs(
-            title: audio.title,
-            artist: audio.artist,
-            uri: audio.uri,
-            duration: audio.duration,
-            id: audio.id,
-          ),
-        )
-        .toList();
-    
+  //   // get all the item in dbSongs as a key
+  //   mappedSongs = allSongs
+  //       .map(
+  //         (audio) => dbSongs(
+  //           title: audio.title,
+  //           artist: audio.artist,
+  //           uri: audio.uri,
+  //           duration: audio.duration,
+  //           id: audio.id,
+  //         ),
+  //       )
+  //       .toList();
 
-    await box.put('musics', mappedSongs);
-    recievedDatabaseSongs = box.get('musics') as List<dbSongs>;
+  //   await box.put('musics', mappedSongs);
+  //   recievedDatabaseSongs = box.get('musics') as List<dbSongs>;
 
-    for (var element in recievedDatabaseSongs) {
-      databaseAudioList.add(
-        Audio.file(element.uri.toString(),
-            metas: Metas(
-                title: element.title,
-                artist: element.artist,
-                id: element.id.toString())),
-      );
-    }
-    setState(() {});
-  }
+  //   for (var element in recievedDatabaseSongs) {
+  //     databaseAudioList.add(
+  //       Audio.file(element.uri.toString(),
+  //           metas: Metas(
+  //               title: element.title,
+  //               artist: element.artist,
+  //               id: element.id.toString())),
+  //     );
+  //   }
+  //   setState(() {});
+  // }
+
+  // void accessPath() {
+  //   for (var i = 0; i < allSongs.length; i++) {
+  //     String _path = allSongs[i].data;
+  //     List<String> _getSplitPath;
+  //     _getSplitPath = _path.split('/');
+  //     gotPathset.add(_getSplitPath[_getSplitPath.length - 2]);
+  //   }
+  //   gotPath = gotPathset.toList();
+  //   // print('=================${gotPath}========================');
+  // }
 }
-
 
 List<SongModel> fetchedSongs = [];
 List<SongModel> allSongs = [];
 List<dbSongs> mappedSongs = [];
 List<dbSongs> recievedDatabaseSongs = [];
 List<Audio> databaseAudioList = [];
+List<Audio> favouriteSongsAudio = [];
+List<dynamic>? likedSongs = [];
+Set<ArtistModel> allArtistsSet = {};
+List<ArtistModel> allArtists = allArtistsSet.toList();
+Set<String> gotPathset = {};
 
+List<String> gotPath = [];

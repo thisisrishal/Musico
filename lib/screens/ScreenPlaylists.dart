@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:musico_scratch/custom/createPlaylistDialogue.dart';
 import 'package:musico_scratch/custom/editPlaylist.dart';
+import 'package:musico_scratch/custom/listFavouriteSongs.dart';
 import 'package:musico_scratch/custom/listOfPlaylist.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
 import 'package:musico_scratch/screens/PlaylistSongs.dart';
+import 'package:musico_scratch/screens/ScreenAlbums.dart';
+import 'package:musico_scratch/screens/ScreenSongHome.dart';
 
 class ScreenPlaylists extends StatefulWidget {
   ScreenPlaylists({Key? key}) : super(key: key);
@@ -15,7 +18,9 @@ class ScreenPlaylists extends StatefulWidget {
 
 class _ScreenPlaylistsState extends State<ScreenPlaylists> {
   // final box = MusicBox.getInstance();
-  final box1 = MusicBox1.getInstance();
+  // final box1 = MusicBox1.getInstance();
+  final box = MusicBox.getInstance();
+
   List playlists = [];
   String? playlistName = '';
 
@@ -33,9 +38,7 @@ class _ScreenPlaylistsState extends State<ScreenPlaylists> {
         child: IconButton(
           icon: Icon(Icons.add),
           color: Colors.white,
-          onPressed: () => 
-          showDialog(
-            
+          onPressed: () => showDialog(
             context: context,
             builder: (context) => createPlaylistDialogue(),
           ),
@@ -50,19 +53,26 @@ class _ScreenPlaylistsState extends State<ScreenPlaylists> {
                 Container(
                   child: Column(
                     children: [
-                      listofPlaylists(
-                        leadingIcon: Icon(
-                          Icons.favorite,
-                          color: Colors.white,
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: ((context) => listFavouriteSongs()),
+                          ),
                         ),
-                        leadingColor: Color(0xffdb5960),
-                        title: 'Favourites',
+                        child: listofPlaylists(
+                          leadingIcon: Icon(
+                            Icons.favorite,
+                            color: Colors.white,
+                          ),
+                          leadingColor: Color(0xffdb5960),
+                          title: 'Favourites',
+                        ),
                       ),
                       GestureDetector(
                         onTap: () {
-                          // print('-------box-------${box.keys}-------');
-
-                          print('--------box1--------${box1.keys}-------');
+                          // print(
+                          //     '=====================${box.get('favourites')}======================');
                         },
                         child: listofPlaylists(
                           leadingIcon: Icon(Icons.watch_later),
@@ -75,9 +85,12 @@ class _ScreenPlaylistsState extends State<ScreenPlaylists> {
                 ),
                 Expanded(
                   child: ValueListenableBuilder(
-                    valueListenable: box1.listenable(),
+                    valueListenable: box.listenable(),
+                    // valueListenable: box1.listenable(),
+
                     builder: (context, boxes, _) {
-                      playlists = box1.keys.toList();
+                      playlists = box.keys.toList();
+                      // playlists = box1.keys.toList();
 
                       return ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
@@ -85,60 +98,72 @@ class _ScreenPlaylistsState extends State<ScreenPlaylists> {
                         itemCount: playlists.length,
                         itemBuilder: (context, index) {
                           return GestureDetector(
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: ((context) => PlaylistSongs(  playListName: playlists[index], playlists:playlists)),
-                              ),
-                            ),
-                            child: listofPlaylists(
-                              title: playlists[index].toString(),
-                              trailingWidget: PopupMenuButton(
-                                itemBuilder: (context) => [
-                                  PopupMenuItem(
-                                    value: 1,
-                                    child: Text(
-                                      'Rename',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                      ),
+                              onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: ((context) => PlaylistSongs(
+                                          Name: playlists[index],
+                                          playlists: playlists)),
                                     ),
                                   ),
-                                  PopupMenuItem(
-                                    value: 2,
-                                    child: Text(
-                                      'Delete',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                                onSelected: (value) {
-                                  if (value == 1) {
-                                     showDialog(
-                                      context: context,
-                                      builder: (context) => editPlaylist(
-                                        playlistName: playlists[index], 
-                                      ),
-                                    );
-                                    editPlaylist(playlistName: playlists[index],);
-                                  }
+                              child: playlists[index] != "musics" &&
+                                      playlists[index] != "favourites"
+                                  // &&playlists[index] != "artists"
 
-                                  if (value == 2) {
-                                    box1.delete(playlists[index]);
-                                    setState(() {
-                                      playlists = box1.keys.toList();
-                                    });
-                                  }
-                                },
-                                icon: Icon(
-                                  Icons.more_vert,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          );
+                                  ? listofPlaylists(
+                                      title: playlists[index].toString(),
+                                      trailingWidget: PopupMenuButton(
+                                        itemBuilder: (context) => [
+                                          PopupMenuItem(
+                                            value: 1,
+                                            child: Text(
+                                              'Rename',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                          PopupMenuItem(
+                                            value: 2,
+                                            child: Text(
+                                              'Delete',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                        onSelected: (value) {
+                                          if (value == 1) {
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  editPlaylist(
+                                                playlistName: playlists[index],
+                                              ),
+                                            );
+                                            editPlaylist(
+                                              playlistName: playlists[index],
+                                            );
+                                          }
+
+                                          if (value == 2) {
+                                            box.delete(playlists[index]);
+                                            // box1.delete(playlists[index]);
+
+                                            setState(() {
+                                              // playlists = box1.keys.toList();
+                                              playlists = box.keys.toList();
+                                            });
+                                          }
+                                        },
+                                        icon: Icon(
+                                          Icons.more_vert,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    )
+                                  : Container());
                         },
                       );
                     },

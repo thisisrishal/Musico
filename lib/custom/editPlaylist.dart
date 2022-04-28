@@ -12,7 +12,9 @@ class editPlaylist extends StatefulWidget {
 
 class _editPlaylistState extends State<editPlaylist> {
   String _newPlaylistName = '';
-  final _box = MusicBox1.getInstance();
+  final _box = MusicBox.getInstance();
+  // final _box1 = MusicBox1.getInstance();
+
 
   final formkey = GlobalKey<FormState>();
   @override

@@ -5,22 +5,30 @@ import '../database/dbSongs.dart';
 import '../screens/PlaylistSongs.dart';
 import '../screens/ScreenSongHome.dart';
 
+bool rebuild = false;
 
-class BottomSheetWidget extends StatefulWidget {
+class TrailingButtonBottomsheet extends StatefulWidget {
+  // final int index;
   final String? playListName;
-  BottomSheetWidget({Key? key, this.playListName}) : super(key: key);
+
+  TrailingButtonBottomsheet({Key? key,  this.playListName})
+      : super(key: key);
 
   @override
-  State<BottomSheetWidget> createState() => _BottomSheetWidgetState();
+  State<TrailingButtonBottomsheet> createState() =>
+      _TrailingButtonBottomsheetState();
 }
 
-class _BottomSheetWidgetState extends State<BottomSheetWidget> {
+class _TrailingButtonBottomsheetState extends State<TrailingButtonBottomsheet> {
   final box = MusicBox.getInstance();
-  final box1 = MusicBox1.getInstance();
 
-  fullSongs() {
-    SongsList = box.get("musics") as List<dbSongs>;
-    playlistSongs = box1.get(widget.playListName)!.cast<dbSongs>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      rebuild = false;
+    });
   }
 
   @override
@@ -73,10 +81,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        trailing: 
-        
-        
-        playlistSongs
+        trailing: playlistSongs
                 .where((element) =>
                     element.id.toString() == SongsList[index].id.toString())
                 .isEmpty
@@ -94,7 +99,9 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                       elemet.id.toString() == SongsList[index].id.toString());
 
                   await box.put(widget.playListName, playlistSongs);
-                  setState(() {});
+                  setState(() {
+                    rebuild = true;
+                  });
                 },
                 icon: const Icon(Icons.check_box),
               ),

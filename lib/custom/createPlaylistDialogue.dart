@@ -12,7 +12,7 @@ class _createPlaylistDialogueState extends State<createPlaylistDialogue> {
   List<dbSongs> playlists = [];
 
   final box = MusicBox.getInstance();
-  final box1 = MusicBox1.getInstance();
+  // final box1 = MusicBox1.getInstance();
 
   String? title;
 
@@ -87,8 +87,9 @@ class _createPlaylistDialogueState extends State<createPlaylistDialogue> {
                   // ),
                   ElevatedButton(
                     onPressed: () {
+                      // box.put(key, value)
                       box.put(playlistTitle, playlists);
-                      box1.put(playlistTitle, playlists);
+                      // box1.put(playlistTitle, playlists);
                       // print('----------${playlistTitle}--------------');
                       Navigator.pop(context);
                       setState(() {});

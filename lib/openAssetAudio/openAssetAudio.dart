@@ -1,4 +1,4 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 
-var assetsAudioPlayer = AssetsAudioPlayer();
+var assetsAudioPlayer = AssetsAudioPlayer.withId("0");
 

@@ -5,14 +5,26 @@ class listofPlaylists extends StatelessWidget {
   Icon? leadingIcon;
   Color? leadingColor;
   Widget? trailingWidget;
+  // Widget? ontapNew;
 
   listofPlaylists(
-      {Key? key, required this.title, this.leadingIcon, this.leadingColor, this.trailingWidget})
+      {Key? key,
+      required this.title,
+      this.leadingIcon,
+      this.leadingColor,
+      this.trailingWidget,
+      })
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      // onTap: () {
+      //   ontapNew != null
+      //       ? Navigator.push(
+      //           context, MaterialPageRoute(builder: (context) => ontapNew!))
+      //       : () {};
+      // },
       leading: Container(
         decoration: BoxDecoration(
           color: leadingColor ?? Colors.grey[800],

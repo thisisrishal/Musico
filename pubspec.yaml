@@ -40,10 +40,10 @@ dependencies:
   path: ^1.8.0
   path_provider_ex: ^1.0.1
   permission_handler: ^9.2.0
+  shared_preferences: ^2.0.13
+  swipe_to: ^1.0.2
 
 dev_dependencies:
-
-  # hive database generators
   build_runner: ^2.1.8
   flutter_test:
     sdk: flutter

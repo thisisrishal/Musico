@@ -1,10 +1,17 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:musico_scratch/custom/customTexts.dart';
+import 'package:musico_scratch/screens/NowPlaying2.dart';
 import 'package:musico_scratch/screens/ScreenAlbums.dart';
 import 'package:musico_scratch/screens/ScreenArtists.dart';
 import 'package:musico_scratch/screens/ScreenPlaylists.dart';
+import 'package:musico_scratch/screens/ScreenSettings.dart';
 import 'package:musico_scratch/screens/ScreenSongHome.dart';
+import 'package:musico_scratch/screens/screenSearch.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:swipe_to/swipe_to.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({Key? key}) : super(key: key);
@@ -18,7 +25,6 @@ class _MyHomeState extends State<MyHome> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _tabController = TabController(length: 4, vsync: this);
@@ -26,7 +32,6 @@ class _MyHomeState extends State<MyHome> with TickerProviderStateMixin {
 
     requestPermission();
   }
-
 
   void requestPermission() async {
     var requestStatus = await Permission.storage.status;
@@ -41,18 +46,173 @@ class _MyHomeState extends State<MyHome> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final AssetsAudioPlayer assetAudioPlayer = AssetsAudioPlayer.withId("0");
+
+    Audio find(List<Audio> source, String fromPath) {
+      return source.firstWhere((element) => element.path == fromPath);
+    }
+
+    // Audio? currentSong;
+    // int currentIndex = 1;
     return SafeArea(
       child: Scaffold(
+        bottomSheet: GestureDetector(
+          onTap: (() {}),
+          child: SizedBox(
+            height: 60,
+            child: assetAudioPlayer.builderCurrent(
+              builder: (BuildContext context, Playing? playing) {
+                final myAudio =
+                    find(databaseAudioList, playing!.audio.assetAudioPath);
+                // currentSong = myAudio;
+                return GestureDetector(
+                  onTap: () async {
+                    // for (var i = 0; i < databaseAudioList.length; i++) {
+                      //   if (databaseAudioList[i].metas.id == myAudio.metas.id) {
+                      // currentIndex = i;
+                      
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) {
+                            return NowPlaying2(index:1 , allSongs: databaseAudioList, songId: myAudio.metas.id! );
+                          }),
+                        ),
+                      );
+                    // }
+                    // ;
+                    // }
+                  },
+                  child: Row(
+                    children: [
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: CircleAvatar(
+                          child: QueryArtworkWidget(
+                            id: int.parse(myAudio.metas.id!),
+                            type: ArtworkType.AUDIO,
+                            artworkBorder:
+                                const BorderRadius.all(Radius.circular(28)),
+                            artworkFit: BoxFit.cover,
+                            nullArtworkWidget:
+                                const Icon(FontAwesomeIcons.music),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 12,
+                            top: 12,
+                          ),
+                          child: SwipeTo(
+                            iconSize: 0,
+                            onLeftSwipe: () {
+                              assetAudioPlayer.next();
+                            },
+                            onRightSwipe: () {
+                              assetAudioPlayer.previous();
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  myAudio.metas.title!,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(color: Colors.black,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  myAudio.metas.artist!,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                      fontSize: 12, fontFamily: 'Poppins'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              assetAudioPlayer.previous();
+                            },
+                            icon: const Icon(FontAwesomeIcons.stepBackward),
+                          ),
+                          PlayerBuilder.isPlaying(
+                              player: assetAudioPlayer,
+                              builder: (context, isPlaying) {
+                                return IconButton(
+                                  onPressed: () async {
+                                    await assetAudioPlayer.playOrPause();
+                                  },
+                                  icon: Icon(
+                                    isPlaying
+                                        ? FontAwesomeIcons.pause
+                                        : FontAwesomeIcons.play,
+                                  ),
+                                );
+                              }),
+                          GestureDetector(
+                            child: IconButton(
+                              onPressed: () {
+                                assetAudioPlayer.next();
+                              },
+                              icon: const Icon(FontAwesomeIcons.stepForward),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
         backgroundColor: Colors.black,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.black,
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: ((context) {
+                      return ScreenSearch();
+                    }),
+                  ),
+                );
+              },
               icon: Icon(Icons.search),
             ),
-            IconButton(onPressed: () {}, icon: Icon(Icons.settings))
+            IconButton(
+                onPressed: () {
+                  // print('==================${gotPath}=======================');
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: ((context) {
+                        return ScreenSettings();
+                      }),
+                    ),
+                  );
+                },
+                icon: Icon(Icons.settings))
           ],
           bottom: TabBar(
             controller: _tabController,
@@ -67,7 +227,6 @@ class _MyHomeState extends State<MyHome> with TickerProviderStateMixin {
         ),
         body: SafeArea(
           child: TabBarView(
-            
             controller: _tabController,
             children: [
               ScreenSongHome(), // ScreenSongs(),

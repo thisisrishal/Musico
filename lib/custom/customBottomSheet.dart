@@ -1,8 +1,12 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:musico_scratch/custom/ListSongs.dart';
 import 'package:musico_scratch/custom/customTexts.dart';
+import 'package:musico_scratch/custom/playlistbottomsheet.dart';
+import 'package:musico_scratch/screens/ScreenSongHome.dart';
 
-bottomSheet(context) {
+bottomSheethomePage(context, index) {
+  // List<Audio> getAllSongsForBottomSheet = [];
   return showModalBottomSheet(
     // barrierColor: Colors.black12,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(21)),
@@ -18,11 +22,19 @@ bottomSheet(context) {
               color: Colors.white,
             ),
           ),
-          ListSongs(
-            title: normalText('Add to playlist'),
-            leading_widget: Icon(
-              Icons.playlist_add_outlined,
-              color: Colors.white,
+          InkWell(
+            onTap: () {
+              // Navigator.pushAndRemoveUntil(
+              // context, playListbottomSheet(context), (route) => false);
+              String songId = databaseAudioList[index].metas.id.toString();
+              playListbottomSheet(context, songId);
+            },
+            child: ListSongs(
+              title: normalText('Add to playlist'),
+              leading_widget: Icon(
+                Icons.playlist_add_outlined,
+                color: Colors.white,
+              ),
             ),
           ),
           ListSongs(
