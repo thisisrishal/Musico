@@ -1,7 +1,6 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
-import 'package:musico_scratch/moved/HomePage.dart';
 import 'package:musico_scratch/Home/HomeTab.dart';
 import 'package:musico_scratch/Home/HomeSongs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
