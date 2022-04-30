@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
-import 'package:musico_scratch/screens/MyHome.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:musico_scratch/screens/ScreenSongHome.dart';
 import 'package:musico_scratch/screens/splashScree.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
-  Hive.registerAdapter(dbSongsAdapter());
-  await Hive.openBox<List>(boxname);
-  await Hive.openBox<List>(boxname1);
+  WidgetsFlutterBinding.ensureInitialized(); // binded to the flutter engine
+
+  await Hive.initFlutter(); //initialize with a path
+  Hive.registerAdapter(
+      dbSongsAdapter()); //  announcing to hive that this adapter is registering
+  await Hive.openBox<List>(boxname); //Opening Hive box globally
+  await Hive.openBox<List>(boxname1); //for playlist and favourites
+
   runApp(const Musico());
+
+  //  check if the favourites containes or not - otherwise we get null
+  // if not created an empty box and assign it has the value to the "favourites" key
   final box = MusicBox.getInstance();
   List<dynamic> favKeys = box.keys.toList();
   if (!favKeys.contains("favourites")) {
     List<dynamic> likedSongs = [];
     await box.put("favourites", likedSongs);
-    
   }
-
-  // if (!favKeys.contains("artists")) {
-  //   List<dynamic> allArtists = [];
-  //   await box.put("artists", allArtists);
-  // }
 }
 
 class Musico extends StatelessWidget {
@@ -38,7 +36,7 @@ class Musico extends StatelessWidget {
       theme: ThemeData(
         textTheme: Theme.of(context).textTheme.apply(
               bodyColor: Color.fromARGB(255, 241, 241, 242),
-              displayColor: Color.fromARGB(255, 233, 233, 238),
+              displayColor: Colors.grey[500],
             ),
       ),
       home: const SplashScreen(),

@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
 import 'package:musico_scratch/moved/MusicListMenu.dart';
 import 'package:musico_scratch/moved/onAudio.dart';
+import 'package:musico_scratch/openAssetAudio/openAssetAudio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 

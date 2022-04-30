@@ -2,7 +2,7 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:musico_scratch/custom/customMade.dart';
 import 'package:musico_scratch/screens/NowPlaying2.dart';
-import 'package:musico_scratch/screens/ScreenSongHome.dart';
+import 'package:musico_scratch/Home/HomeSongs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class ScreenSearch extends StatefulWidget {

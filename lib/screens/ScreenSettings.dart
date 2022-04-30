@@ -1,12 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:musico_scratch/custom/customTexts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
-class ScreenSettings extends StatelessWidget {
+class ScreenSettings extends StatefulWidget {
   const ScreenSettings({Key? key}) : super(key: key);
 
   @override
+  State<ScreenSettings> createState() => _ScreenSettingsState();
+}
+
+class _ScreenSettingsState extends State<ScreenSettings> {
+  bool _toggled = false;
+  @override
+  void initState() {
+    super.initState();
+    getSwitchValues();
+
+    
+  }
+  Future<bool> getSwitchState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? _toggled = prefs.getBool("notification");
+
+    return _toggled ?? true;
+  }
+
+  getSwitchValues() async {
+    _toggled = await getSwitchState();
+    setState(() {});
+  }
+
+  Future<bool> saveSwitchState(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("notification", value);
+    return prefs.setBool("notification", value);
+  }
+
+  
+  @override
   Widget build(BuildContext context) {
+     
+
+   
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings'),
@@ -28,16 +66,75 @@ class ScreenSettings extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      Container(
+                        child: SwitchListTile(
+                          title: const Text(
+                            'Notifications',
+                            style: TextStyle(fontSize: 25, fontFamily: 'Poppins'),
+                          ),
+                          secondary: const Icon(
+                            FontAwesomeIcons.solidBell,
+                          ),
+                          value: _toggled,
+                          onChanged: (bool value) {
+                            setState(() {
+                              _toggled = value;
+                              saveSwitchState(value);
+                              if (_toggled == true) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      'App need to Restart to see the Changes',
+                                      style: TextStyle(fontFamily: 'Poppins'),
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      'App need to Restart to see the Changes',
+                                      style: TextStyle(fontFamily: 'Poppins'),
+                                    ),
+                                  ),
+                                );
+                              }
+                            });
+                          },
+                        ),
+                      ),
                       // TextButton(onPressed: (){}, child:Column(
                       //   children: [
 
                       //   ],
                       // ) ),
-                      richTextHead(
+                      GestureDetector(
+                        onTap: (){
+                          showAboutDialog(
+                            context: context,
+                            applicationName: 'Musico',
+                            applicationVersion: '1.0.1',
+                            children: [
+                              const Text(
+                                "Musico is a Offline Music Player Created by Mohammed Rishal.",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ],
+                            applicationIcon: SizedBox(
+                              height: 47,
+                              width: 47,
+                              child: Image.asset("assets/images/muzify.png"),
+                            ),
+                          );
+                          
+                        },
+                        child: richTextHead(
                         'About',
                         color: Colors.white,
                         weight: FontWeight.bold,
                       ),
+                      ),
+                     
                       SizedBox(
                         height: 20,
                       ),

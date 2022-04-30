@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:musico_scratch/custom/customTexts.dart';
 import 'package:musico_scratch/custom/listPathSongs.dart';
-import 'package:musico_scratch/screens/ScreenSongHome.dart';
+import 'package:musico_scratch/Home/HomeSongs.dart';
 
 class ScreenAlbums extends StatefulWidget {
   const ScreenAlbums({Key? key}) : super(key: key);
@@ -13,7 +13,6 @@ class ScreenAlbums extends StatefulWidget {
 class _ScreenAlbumsState extends State<ScreenAlbums> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     accessPath();
 

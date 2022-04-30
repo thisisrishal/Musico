@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:musico_scratch/custom/customTexts.dart';
 import 'package:musico_scratch/custom/listArtistSongs.dart';
 import 'package:musico_scratch/screens/PlaylistSongs.dart';
-import 'package:musico_scratch/screens/ScreenSongHome.dart';
+import 'package:musico_scratch/Home/HomeSongs.dart';
 
 class ScreenArtists extends StatelessWidget {
   const ScreenArtists({Key? key}) : super(key: key);

@@ -4,7 +4,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
 
 import 'package:musico_scratch/screens/NowPlaying2.dart';
-import 'package:musico_scratch/screens/ScreenSongHome.dart';
+import 'package:musico_scratch/Home/HomeSongs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class listArtistsongs extends StatefulWidget {
@@ -67,8 +67,8 @@ class _listFavouriteSongsState extends State<listArtistsongs> {
                         MaterialPageRoute(
                           builder: ((context) => NowPlaying2(
                                 index: index,
-                                allSongs: allArtistSongs,
-                                songId: allArtists[index].id.toString(),
+                                allSongs: databaseAudioList,
+                                songId: allSongs[index].id.toString(),
                               )),
                         ),
                       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
-import 'package:musico_scratch/screens/ScreenSongHome.dart';
+import 'package:musico_scratch/screens/NowPlaying2.dart';
+import 'package:musico_scratch/Home/HomeSongs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class listPathSongs extends StatefulWidget {
@@ -88,38 +89,44 @@ class _listPathSongsState extends State<listPathSongs> {
         child: Container(
           child: ListView.builder(
             itemBuilder: (context, index) {
-              return ListTile(
-                onTap: () {},
-                title: Text(pathSongList[index].title),
-                // subtitle: Text(index.toString()),
-              );
-              // newfunction(index);
-              // return ListTile(
-              //   title: GestureDetector(
-              //       onTap: () {
-              //         print('====ontap==========${pathSongList[index].title}==================');
-              //       },
-              //       child: Text(pathSongList[index].title)),
-              //   leading: Container(
-              //     // decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8)),color: Colors.white30,),
-              //     height: 43,
-              //     width: 43,
-
-              //     // color: Colors.grey,
-              //     child: QueryArtworkWidget(
-              //       artworkBorder: BorderRadius.all(Radius.circular(7)),
-              //       // artworkClipBehavior: Clip.antiAliasWithSaveLayer,
-              //       artworkFit: BoxFit.fill,
-              //       nullArtworkWidget: Container(
-              //           child: Image.asset(
-              //         'assets/images/muzify.png',
-              //         color: Colors.white30,
-              //       )),
-              //       id: int.parse(pathSongList[index].id.toString()),
-              //       type: ArtworkType.AUDIO,
-              //     ),
-              //   ),
+              // return
+              // ListTile(
+              //   onTap: () {},
+              //   title: Text(pathSongList[index].title),
+              //   // subtitle: Text(index.toString()),
               // );
+              // newfunction(index);
+              return ListTile(
+                title: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => NowPlaying2(index: index, allSongs: databaseAudioList, songId: databaseAudioList[index].metas.id.toString())),
+                        ),
+                      );
+                    },
+                    child: Text(pathSongList[index].title)),
+                leading: Container(
+                  // decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8)),color: Colors.white30,),
+                  height: 43,
+                  width: 43,
+
+                  // color: Colors.grey,
+                  child: QueryArtworkWidget(
+                    artworkBorder: BorderRadius.all(Radius.circular(7)),
+                    // artworkClipBehavior: Clip.antiAliasWithSaveLayer,
+                    artworkFit: BoxFit.fill,
+                    nullArtworkWidget: Container(
+                        child: Image.asset(
+                      'assets/images/muzify.png',
+                      color: Colors.white30,
+                    )),
+                    id: int.parse(pathSongList[index].id.toString()),
+                    type: ArtworkType.AUDIO,
+                  ),
+                ),
+              );
             },
             itemCount: (pathSongList.length),
           ),

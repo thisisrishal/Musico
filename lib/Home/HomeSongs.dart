@@ -2,6 +2,7 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
 import 'package:musico_scratch/moved/MusicListMenu.dart';
+import 'package:musico_scratch/openAssetAudio/openAssetAudio.dart';
 import 'package:musico_scratch/screens/NowPlaying2.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -73,19 +74,22 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
           return ListView.builder(
             itemBuilder: (context, index) => ListTile(
               onTap: () {
+                OpenPlayer(fullSongs: databaseAudioList, index: index)
+                    .openAssetPlayer(index: index, songs: databaseAudioList);
                
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: ((context) {
-                      return NowPlaying2(
+                      return
+                       NowPlaying2(
                         index: index,
                         allSongs: databaseAudioList,
                         songId: allSongs[index].id.toString(),
                       );
-                    }),
-                  ),
-                );
+                    })));
+                  
+                // );
                 // openPlayer(audios, index);
               },
 

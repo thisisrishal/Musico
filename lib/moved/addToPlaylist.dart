@@ -15,7 +15,7 @@ class AddtoPlayList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final box = MusicBox.getInstance();
-    final box1 = MusicBox1.getInstance();
+    // final box1 = MusicBox1.getInstance();
 
     // final box1 = MusicBox1.getInstance();
     playlists = box.keys.toList();

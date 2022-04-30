@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
 import 'package:musico_scratch/moved/addToPlaylist.dart';
+import 'package:musico_scratch/openAssetAudio/openAssetAudio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class NowPlaying2 extends StatefulWidget {
@@ -31,23 +32,23 @@ class _NowPlayingState extends State<NowPlaying2> {
 
   List<dbSongs> databaseSongs = [];
 
-  final assetsAudioPlayer = AssetsAudioPlayer.withId("0");
+  // final assetsAudioPlayer = AssetsAudioPlayer.withId("0");
   @override
   void initState() {
     super.initState();
 
-    openPlayer();
+    // openPlayer();
   }
 
-  void openPlayer() async {
-    await assetsAudioPlayer.open(
-        Playlist(audios: widget.allSongs, startIndex: widget.index),
-        showNotification: true,
-        autoStart: true,
-        loopMode: LoopMode.playlist,
-        playInBackground: PlayInBackground.enabled,
-        notificationSettings: NotificationSettings(stopEnabled: false));
-  }
+  // void openPlayer() async {
+  //   await assetsAudioPlayer.open(
+  //       Playlist(audios: widget.allSongs, startIndex: widget.index),
+  //       showNotification: true,
+  //       autoStart: true,
+  //       loopMode: LoopMode.playlist,
+  //       playInBackground: PlayInBackground.enabled,
+  //       notificationSettings: NotificationSettings(stopEnabled: false));
+  // }
 
   Audio find(List<Audio> source, String fromPath) {
     return source.firstWhere((element) {
