@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
 import 'package:musico_scratch/moved/MusicListMenu.dart';
 import 'package:musico_scratch/openAssetAudio/openAssetAudio.dart';
-import 'package:musico_scratch/screens/NowPlaying2.dart';
+import 'package:musico_scratch/screens/NowPlaying.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class ScreenSongHome extends StatefulWidget {
   ScreenSongHome({Key? key}) : super(key: key);
 
-  get fullSongs => null;
+
 
   @override
   State<ScreenSongHome> createState() => _ScreenSongHomeState();
@@ -19,25 +19,9 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
   @override
   void initState() {
     super.initState();
-
-    // fetchsongs();
-    // fetchArtist();
-    // fetchAllFavourites();
-    // accessPath();
   }
 
   final _audioQuery = new OnAudioQuery();
-  // void fetchArtist() async {
-  //   List<ArtistModel> fetchallArtists = await _audioQuery.queryArtists();
-  //   for (var song in fetchallArtists) {
-  //     // print('{=====================${song}===================}');
-  //     if (song.artist != '<unknown>') {
-  //       allArtistsSet.add(song);
-  //     }
-  //   }
-
-  //   // box.put('artists', value);
-  // }
 
   final box = MusicBox.getInstance(); //check
 
@@ -65,43 +49,44 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
             return Center(
               child: CircularProgressIndicator(),
             );
-          }
-          if (item.data!.isEmpty) {
+          } else if (item.data!.isEmpty) {
             return Center(
-              child: Text('No Songs '),
+              child: TextButton(
+                  onPressed: () async {},
+                  child: Text(
+                    'No Songs',
+                    style: TextStyle(color: Colors.grey),
+                  )),
             );
           }
+
           return ListView.builder(
             itemBuilder: (context, index) => ListTile(
               onTap: () {
                 OpenPlayer(fullSongs: databaseAudioList, index: index)
                     .openAssetPlayer(index: index, songs: databaseAudioList);
-               
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: ((context) {
-                      return
-                       NowPlaying2(
-                        index: index,
-                        allSongs: databaseAudioList,
+                      return NowPlaying(
+                        songList: databaseAudioList,
                         songId: allSongs[index].id.toString(),
                       );
-                    })));
-                  
-                // );
-                // openPlayer(audios, index);
+                    }),
+                  ),
+                );
+
+                
               },
 
               leading: Container(
-                // decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8)),color: Colors.white30,),
                 height: 43,
                 width: 43,
 
-                // color: Colors.grey,
                 child: QueryArtworkWidget(
                   artworkBorder: BorderRadius.all(Radius.circular(7)),
-                  // artworkClipBehavior: Clip.antiAliasWithSaveLayer,
                   artworkFit: BoxFit.fill,
                   nullArtworkWidget: Container(
                       child: Image.asset(
@@ -115,13 +100,12 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
 
               title: SizedBox(
                 width: 200,
-                // height: 40,
                 child: Text(
                   recievedDatabaseSongs[index].title.toString(),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-              ), // check display name also
+              ), 
               subtitle: Text(
                 "${recievedDatabaseSongs[index].artist}",
                 maxLines: 1,
@@ -131,18 +115,6 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
                 songId: databaseAudioList[index].metas.id.toString(),
                 index: index,
               ),
-
-              //  MusicListMenu(
-              //               songId: widget.fullSongs[index].metas.id.toString(),
-              //             ),
-
-              // IconButton(
-              // onPressed: (){
-              //   return bottomSheethomePage(context,index);
-              // },
-              // icon: Icon(Icons.more_horiz_rounded),
-              // color: Colors.white,
-              // ),
             ),
             itemCount: recievedDatabaseSongs.length,
           );
@@ -150,56 +122,6 @@ class _ScreenSongHomeState extends State<ScreenSongHome> {
       ),
     );
   }
-
-  // fetchsongs() async {
-  //   fetchedSongs = await _audioQuery.querySongs();
-   
-
-  //   for (var song in fetchedSongs) {
-  //     if (song.fileExtension == 'mp3') {
-  //       allSongs.add(song);
-  //     }
-  //     // return allSongs;
-  //   }
-
-  //   // get all the item in dbSongs as a key
-  //   mappedSongs = allSongs
-  //       .map(
-  //         (audio) => dbSongs(
-  //           title: audio.title,
-  //           artist: audio.artist,
-  //           uri: audio.uri,
-  //           duration: audio.duration,
-  //           id: audio.id,
-  //         ),
-  //       )
-  //       .toList();
-
-  //   await box.put('musics', mappedSongs);
-  //   recievedDatabaseSongs = box.get('musics') as List<dbSongs>;
-
-  //   for (var element in recievedDatabaseSongs) {
-  //     databaseAudioList.add(
-  //       Audio.file(element.uri.toString(),
-  //           metas: Metas(
-  //               title: element.title,
-  //               artist: element.artist,
-  //               id: element.id.toString())),
-  //     );
-  //   }
-  //   setState(() {});
-  // }
-
-  // void accessPath() {
-  //   for (var i = 0; i < allSongs.length; i++) {
-  //     String _path = allSongs[i].data;
-  //     List<String> _getSplitPath;
-  //     _getSplitPath = _path.split('/');
-  //     gotPathset.add(_getSplitPath[_getSplitPath.length - 2]);
-  //   }
-  //   gotPath = gotPathset.toList();
-  //   // print('=================${gotPath}========================');
-  // }
 }
 
 List<SongModel> fetchedSongs = [];

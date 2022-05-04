@@ -2,6 +2,7 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
+import 'package:musico_scratch/openAssetAudio/openAssetAudio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class playlistNowPlaying extends StatefulWidget {
@@ -16,8 +17,8 @@ class playlistNowPlaying extends StatefulWidget {
 }
 
 class _NowPlayingState extends State<playlistNowPlaying> {
-  final assetsAudioPlayer = AssetsAudioPlayer.withId("0");
-  // final AssetsAudioPlayer player = AssetsAudioPlayer.withId("0");
+  // final assetsAudioPlayer = assetsAudioPlayer.withId("0");
+  // final assetsAudioPlayer player = assetsAudioPlayer.withId("0");
 
   // final List<StreamSubscription> subscription = [];
 
@@ -25,7 +26,7 @@ class _NowPlayingState extends State<playlistNowPlaying> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // assetsAudioPlayer = AssetsAudioPlayer.newPlayer();
+    // assetsAudioPlayer = assetsAudioPlayer.newPlayer();
     // subscription.add(assetsAudioPlayer.playlistAudioFinished.listen((data) {
     //print('playlistAudioFinished :$data');
     // }));
@@ -46,14 +47,7 @@ class _NowPlayingState extends State<playlistNowPlaying> {
         notificationSettings: NotificationSettings(stopEnabled: false));
   }
 
-  Audio find(List<Audio> source, String fromPath) {
-    return source.firstWhere((element) {
-      // print('---------------------------${fromPath}---');
-
-      return element.path == fromPath;
-    });
-    //assertion
-  }
+ 
 
   bool isplaying = false;
   IconData playbtn = Icons.pause_circle_outline_rounded;

@@ -4,7 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
 import 'package:musico_scratch/moved/onAudio.dart';
 import 'package:musico_scratch/openAssetAudio/openAssetAudio.dart';
-import 'package:musico_scratch/screens/NowPlaying2.dart';
+import 'package:musico_scratch/screens/NowPlaying.dart';
 import 'package:musico_scratch/Home/HomeSongs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -66,9 +66,9 @@ class _listFavouriteSongsState extends State<listFavouriteSongs> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: ((context) => NowPlaying2(
-                                        index: index,
-                                        allSongs: favouriteSongsAudio,
+                                  builder: ((context) => NowPlaying(
+                                        
+                                        songList: favouriteSongsAudio,
                                         songId:
                                             likedSongs![index].id.toString(),
                                       )),

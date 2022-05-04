@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
-import 'package:musico_scratch/screens/NowPlaying2.dart';
+import 'package:musico_scratch/screens/NowPlaying.dart';
 import 'package:musico_scratch/Home/HomeSongs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -102,7 +102,7 @@ class _listPathSongsState extends State<listPathSongs> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: ((context) => NowPlaying2(index: index, allSongs: databaseAudioList, songId: databaseAudioList[index].metas.id.toString())),
+                          builder: ((context) => NowPlaying( songList: databaseAudioList, songId: databaseAudioList[index].metas.id.toString())),
                         ),
                       );
                     },

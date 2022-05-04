@@ -53,15 +53,11 @@ class _MusicListMenuState extends State<MusicListMenu> {
                     ),
                     
                   );setState(() {
-                    
                   });
-                  
                 },
                 child: const Text(
                   "Add to Favourite",
                   style: TextStyle(color: Colors.black),
-
-                  // style: TextStyle(fontFamily: 'Poppins'),
                 ),
               )
             : PopupMenuItem(
@@ -73,7 +69,6 @@ class _MusicListMenuState extends State<MusicListMenu> {
                     SnackBar(
                       content: Text(
                         temp.title! + " Removed from Favourites",
-                        // style: const TextStyle(fontFamily: 'Poppins'),
                       ),
                     ),
                   );
@@ -84,47 +79,7 @@ class _MusicListMenuState extends State<MusicListMenu> {
                 ),
               ),
 
-        // favourites!
-        //         .where((element) => element.id.toString() == temp.id.toString())
-        //         .isEmpty
-        //     ? PopupMenuItem(
-        //         onTap: () async {
-        //           favourites.add(temp);
-        //           await box.put("favourites", favourites);
-        //           ScaffoldMessenger.of(context).showSnackBar(
-        //             SnackBar(
-        //               content: Text(
-        //                 temp.title! + " Added to Favourites",
-        //                 style: const TextStyle(fontFamily: 'Poppins'),
-        //               ),
-        //             ),
-        //           );
-        //         },
-        //         child: const Text(
-        //           "Add to Favourite",
-        //           style: TextStyle(fontFamily: 'Poppins'),
-        //         ),
-        //       )
-        // :
-        //  PopupMenuItem(
-        //     onTap: () async {
-        //       favourites.removeWhere(
-        //           (element) => element.id.toString() == temp.id.toString());
-        //       await box.put("favourites", favourites);
-        //       ScaffoldMessenger.of(context).showSnackBar(
-        //         SnackBar(
-        //           content: Text(
-        //             temp.title! + " Removed from Favourites",
-        //             style: const TextStyle(fontFamily: 'Poppins'),
-        //           ),
-        //         ),
-        //       );
-        //     },
-        //     child: const Text(
-        //       "Remove From Favourite",
-        //       style: TextStyle(fontFamily: 'Poppins'),
-        //     ),
-        //   ),
+       
         const PopupMenuItem(
           child: Text(
             "Add to Playlist",

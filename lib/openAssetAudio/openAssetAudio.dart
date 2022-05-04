@@ -1,9 +1,6 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final assetsAudioPlayer = AssetsAudioPlayer.withId("0");
-
-
 class OpenPlayer {
   List<Audio> fullSongs;
   int index;
@@ -16,11 +13,9 @@ class OpenPlayer {
 
   OpenPlayer({required this.fullSongs, required this.index});
 
-  final AssetsAudioPlayer player = AssetsAudioPlayer.withId('0');
-
   openAssetPlayer({List<Audio>? songs, required int index}) async {
     notify = await setNotifyValue();
-    player.open(
+    assetsAudioPlayer.open(
       Playlist(audios: songs, startIndex: index),
       showNotification: notify == null || notify == true ? true : false,
       notificationSettings: const NotificationSettings(
@@ -34,3 +29,10 @@ class OpenPlayer {
   }
 }
 
+final assetsAudioPlayer = AssetsAudioPlayer.withId("0");
+
+// Take the list and take playing  audio with that list
+// and return the audio that in list
+Audio find(List<Audio> source, String fromPath) {
+  return source.firstWhere((element) => element.path == fromPath);
+}

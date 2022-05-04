@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:musico_scratch/screens/splashScree.dart';
+import 'package:musico_scratch/screens/SplashScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // binded to the flutter engine
@@ -18,6 +18,7 @@ void main() async {
   //  check if the favourites containes or not - otherwise we get null
   // if not created an empty box and assign it has the value to the "favourites" key
   final box = MusicBox.getInstance();
+  
   List<dynamic> favKeys = box.keys.toList();
   if (!favKeys.contains("favourites")) {
     List<dynamic> likedSongs = [];

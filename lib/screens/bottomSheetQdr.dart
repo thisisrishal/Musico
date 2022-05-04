@@ -1,6 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
+import 'package:musico_scratch/openAssetAudio/openAssetAudio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class bottomQdr extends StatefulWidget {
@@ -28,7 +29,7 @@ class _NowPlayingState extends State<bottomQdr> {
 
   List<dbSongs> databaseSongs = [];
 
-  final assetsAudioPlayer = AssetsAudioPlayer.withId("0");
+  // final assetsAudioPlayer = assetsAudioPlayer.withId("0");
   @override
   void initState() {
     super.initState();

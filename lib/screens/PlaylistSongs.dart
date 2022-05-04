@@ -10,7 +10,7 @@ import 'package:musico_scratch/database/dbSongs.dart';
 import 'package:musico_scratch/moved/onAudio.dart';
 import 'package:musico_scratch/moved/playlistNowPlaying.dart';
 import 'package:musico_scratch/openAssetAudio/openAssetAudio.dart';
-import 'package:musico_scratch/screens/NowPlaying2.dart';
+import 'package:musico_scratch/screens/NowPlaying.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 import '../custom/editPlaylist.dart';
