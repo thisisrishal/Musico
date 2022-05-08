@@ -1,6 +1,6 @@
 # musico_scratch
 
-A new Flutter project.
+A New Flutter Music Player
 
 ## Getting Started
 
