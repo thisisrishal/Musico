@@ -4,4 +4,3 @@ part of 'song_bloc.dart';
 abstract class SongState {}
 
 class SongInitial extends SongState {}
-
