@@ -2,7 +2,7 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
-import 'package:musico_scratch/openAssetAudio/openAssetAudio.dart';
+import 'package:musico_scratch/openAssetAudio/play_song.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class playlistNowPlaying extends StatefulWidget {
@@ -109,7 +109,7 @@ class _NowPlayingState extends State<playlistNowPlaying> {
                             // artworkClipBehavior: Clip.antiAliasWithSaveLayer,
                             artworkFit: BoxFit.fill,
                             nullArtworkWidget:
-                                Image.asset('assets/images/muzify.png'),
+                                Image.asset('assets/images/7461e3b8cc4ec795203213c851932faa.jpg'),
                             id: int.parse(myaudio.metas.id!),
                             type: ArtworkType.AUDIO,
                           ),

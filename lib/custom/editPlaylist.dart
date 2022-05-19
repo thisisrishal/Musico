@@ -97,7 +97,6 @@ class _editPlaylistState extends State<editPlaylist> {
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
-                          fontFamily: 'Poppins',
                         ),
                       ),
                     ),
@@ -126,7 +125,6 @@ class _editPlaylistState extends State<editPlaylist> {
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
-                          fontFamily: 'Poppins',
                         ),
                       ),
                     ),

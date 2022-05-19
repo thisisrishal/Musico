@@ -2,11 +2,11 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
-import 'package:musico_scratch/moved/onAudio.dart';
-import 'package:musico_scratch/openAssetAudio/openAssetAudio.dart';
-import 'package:musico_scratch/screens/NowPlaying.dart';
-import 'package:musico_scratch/Home/HomeSongs.dart';
+import 'package:musico_scratch/new%202/NowPlaying.dart';
+import 'package:musico_scratch/openAssetAudio/play_song.dart';
+import 'package:musico_scratch/presentation/songs/songs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+
 
 class listFavouriteSongs extends StatefulWidget {
   const listFavouriteSongs({Key? key}) : super(key: key);
@@ -85,7 +85,7 @@ class _listFavouriteSongsState extends State<listFavouriteSongs> {
                                   artworkFit: BoxFit.fill,
                                   nullArtworkWidget: Container(
                                       child: Image.asset(
-                                    'assets/images/muzify.png',
+                                    'assets/images/7461e3b8cc4ec795203213c851932faa.jpg',
                                     color: Colors.white30,
                                   )),
                                   id: int.parse(

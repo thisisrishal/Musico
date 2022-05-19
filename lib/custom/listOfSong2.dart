@@ -1,5 +1,5 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:musico_scratch/Home/HomeSongs.dart';
+import 'package:musico_scratch/presentation/songs/songs.dart';
 
 final audios2 = <Audio>[
   // Audio(

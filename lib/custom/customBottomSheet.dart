@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:musico_scratch/custom/ListSongs.dart';
 import 'package:musico_scratch/custom/customTexts.dart';
 import 'package:musico_scratch/custom/playlistbottomsheet.dart';
-import 'package:musico_scratch/Home/HomeSongs.dart';
+import 'package:musico_scratch/presentation/songs/songs.dart';
 
 bottomSheethomePage(context, index) {
   // List<Audio> getAllSongsForBottomSheet = [];

@@ -13,7 +13,7 @@ class CreatePlaylist extends StatefulWidget {
 class _CreatePlaylistState extends State<CreatePlaylist> {
   List<dbSongs> playlists = [];
 
-  final box = MusicBox1.getInstance();
+  final box = MusicBox.getInstance();
   
 
   String? title;
@@ -43,7 +43,7 @@ class _CreatePlaylistState extends State<CreatePlaylist> {
               child: Text(
                 "Add a name to playlist.",
                 style: TextStyle(
-                    color: Colors.white, fontSize: 18, fontFamily: 'Poppins'),
+                    color: Colors.white, fontSize: 18,),
               ),
             ),
             Padding(
@@ -65,7 +65,6 @@ class _CreatePlaylistState extends State<CreatePlaylist> {
                   style: const TextStyle(
                     fontSize: 22,
                     color: Colors.white,
-                    fontFamily: 'Poppins',
                   ),
                   onChanged: (value) {
                     title = value.trim();
@@ -105,7 +104,7 @@ class _CreatePlaylistState extends State<CreatePlaylist> {
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 15,
-                              fontFamily: 'Poppins'),
+                              ),
                         ),
                       ),
                     ),
@@ -134,7 +133,7 @@ class _CreatePlaylistState extends State<CreatePlaylist> {
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
-                            fontFamily: 'Poppins',
+                             
                           ),
                         ),
                       ),

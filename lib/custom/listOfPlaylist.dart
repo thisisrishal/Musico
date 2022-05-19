@@ -5,16 +5,17 @@ class listofPlaylists extends StatelessWidget {
   Icon? leadingIcon;
   Color? leadingColor;
   Widget? trailingWidget;
+  Color? trailingWidgetColor;
   // Widget? ontapNew;
 
-  listofPlaylists(
-      {Key? key,
-      required this.title,
-      this.leadingIcon,
-      this.leadingColor,
-      this.trailingWidget,
-      })
-      : super(key: key);
+  listofPlaylists({
+    Key? key,
+    required this.title,
+    this.leadingIcon,
+    this.leadingColor,
+    this.trailingWidget,
+    this.trailingWidgetColor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class listofPlaylists extends StatelessWidget {
       ),
       trailing: trailingWidget ??= Icon(
         Icons.navigate_next,
-        color: Colors.white,
+        color: trailingWidgetColor??Colors.white,
       ),
     );
   }

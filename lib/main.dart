@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:musico_scratch/core/constants.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:musico_scratch/screens/SplashScreen.dart';
+import 'package:musico_scratch/new%202/SplashScreen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // binded to the flutter engine
@@ -12,13 +14,27 @@ void main() async {
       dbSongsAdapter()); //  announcing to hive that this adapter is registering
   await Hive.openBox<List>(boxname); //Opening Hive box globally
   await Hive.openBox<List>(boxname1); //for playlist and favourites
+  theme:
+  ThemeData(
+    appBarTheme: AppBarTheme(backgroundColor: Colors.black),
+    primarySwatch: Colors.blue,
+    backgroundColor: Colors.black,
+    textTheme: const TextTheme(
+      bodyText1: TextStyle(
+        color: Colors.white,
+      ),
+      bodyText2: TextStyle(
+        color: Colors.white,
+      ),
+    ),
+  );
 
   runApp(const Musico());
 
   //  check if the favourites containes or not - otherwise we get null
   // if not created an empty box and assign it has the value to the "favourites" key
   final box = MusicBox.getInstance();
-  
+
   List<dynamic> favKeys = box.keys.toList();
   if (!favKeys.contains("favourites")) {
     List<dynamic> likedSongs = [];
@@ -35,6 +51,7 @@ class Musico extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Musico',
       theme: ThemeData(
+        fontFamily: 'futura',
         textTheme: Theme.of(context).textTheme.apply(
               bodyColor: Color.fromARGB(255, 241, 241, 242),
               displayColor: Colors.grey[500],

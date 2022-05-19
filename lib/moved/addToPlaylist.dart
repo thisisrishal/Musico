@@ -39,17 +39,16 @@ class AddtoPlayList extends StatelessWidget {
               ),
               title: const Text(
                 "Add a New Playlist",
-                style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 25,
-                    fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
               ),
             ),
           ),
+
+          //?list playlists
+
           ...playlists // playlists = box.keys.toList();
               .map(
-                (per_playlistName) => per_playlistName != "musics"
-                 &&
+                (per_playlistName) => per_playlistName != "musics" &&
                         per_playlistName != 'favourites'
                     ? ListTile(
                         onTap: () async {
@@ -66,8 +65,10 @@ class AddtoPlayList extends StatelessWidget {
                                   .toList();
 
                           if (existingSongs.isEmpty) {
+                            
                             final songs = box.get("musics")
                                 as List<dbSongs>; // got all song in database
+
                             final temp = songs.firstWhere(
                                 (element) => //got the id of database song id that same as passed song
                                     element.id.toString() ==
@@ -83,18 +84,15 @@ class AddtoPlayList extends StatelessWidget {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(
                                 song.title! + ' Added to Playlist',
-                                style: const TextStyle(fontFamily: 'Poppins'),
+                                style: const TextStyle(),
                               ),
                             ));
-
                           } else {
-                            
                             Navigator.of(context).pop();
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
                                   song.title! + ' is already in Playlist.',
-                                  style: const TextStyle(fontFamily: 'Poppins'),
                                 ),
                               ),
                             );
@@ -107,7 +105,6 @@ class AddtoPlayList extends StatelessWidget {
                         title: Text(
                           per_playlistName.toString(),
                           style: const TextStyle(
-                            fontFamily: 'Poppins',
                             fontSize: 22,
                           ),
                         ),

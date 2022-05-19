@@ -2,10 +2,11 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
+import 'package:musico_scratch/new%202/NowPlaying.dart';
 
-import 'package:musico_scratch/screens/NowPlaying.dart';
-import 'package:musico_scratch/Home/HomeSongs.dart';
+import 'package:musico_scratch/presentation/songs/songs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+
 
 class listArtistsongs extends StatefulWidget {
   final int newIndex;
@@ -77,10 +78,10 @@ class _listFavouriteSongsState extends State<listArtistsongs> {
                           width: 43,
                           child: QueryArtworkWidget(
                             artworkBorder: BorderRadius.all(Radius.circular(7)),
-                            artworkFit: BoxFit.fill,
+                            artworkFit: BoxFit.cover,
                             nullArtworkWidget: Container(
                                 child: Image.asset(
-                              'assets/images/muzify.png',
+                              'assets/images/7461e3b8cc4ec795203213c851932faa.jpg',
                               color: Colors.white30,
                             )),
                             id: int.parse(allArtists[index].id.toString()),

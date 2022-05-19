@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:musico_scratch/new%202/PlaylistSongs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 import '../database/dbSongs.dart';
-import '../screens/PlaylistSongs.dart';
-import '../Home/HomeSongs.dart';
+import '../presentation/songs/songs.dart';
 
 
 class BottomSheetWidget extends StatefulWidget {
@@ -51,7 +51,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
             artworkFit: BoxFit.fill,
             nullArtworkWidget: Container(
                 child: Image.asset(
-              'assets/images/muzify.png',
+              'assets/images/7461e3b8cc4ec795203213c851932faa.jpg',
               color: Colors.white30,
             )),
             id: int.parse(allSongs[index].id.toString()),

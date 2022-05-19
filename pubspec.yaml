@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ">=2.16.1 <3.0.0"
@@ -29,14 +29,14 @@ environment:
 dependencies:
   assets_audio_player: ^3.0.4+1
   audio_video_progress_bar: ^0.10.0
-  cupertino_icons: ^1.0.2
+  bloc: ^8.0.3
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.0.1
   flutter_screenutil: ^5.4.0+1
   font_awesome_flutter: ^10.1.0
   hive: ^2.1.0
   hive_flutter: ^1.1.0
-  lottie: ^1.3.0
   marquee: ^2.2.1
   on_audio_query: ^2.6.0
   path: ^1.8.0
@@ -62,19 +62,11 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/music/
+
     - assets/images/
-    - assets/images/logo-2.png
-    - assets/images/love.png
-    - assets/images/mj.jpg
-    - assets/images/love.png
-    - assets/images/adelle.jpeg
-    - assets/images/sidsriram.jpg
-    - assets/images/Bille_Ilish.jpg
-    - assets/images/eminem.jpg
-    - assets/images/sidsriram.jpg
-    - assets/images/muzify.png
-    - assets/json/splash.json
+    - assets/fonts/futura/FuturaPTHeavyOblique.otf
+    - assets/images/7461e3b8cc4ec795203213c851932faa.jpg
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
@@ -84,15 +76,15 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
+  fonts:
+    - family: Gilmer
+      fonts:
+        - asset: assets/fonts/Gilmer-Light.otf
+    #       - asset: fonts/Schyler-Italic.ttf
+    #         style: italic
+    # - family: futura
+    #   fonts:
+    #     - assets/fonts/futura/FuturaPTHeavyOblique.otf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
