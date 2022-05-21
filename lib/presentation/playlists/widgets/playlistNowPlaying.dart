@@ -2,7 +2,7 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
-import 'package:musico_scratch/openAssetAudio/play_song.dart';
+import 'package:musico_scratch/main_page/widgets/play_song.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class playlistNowPlaying extends StatefulWidget {
@@ -204,30 +204,6 @@ class _NowPlayingState extends State<playlistNowPlaying> {
                                   },
                                 ),
 
-                                // GestureDetector(
-                                //   onTap: () {
-                                //     if (isplaying != true) {
-                                //       setState(() {
-                                //         playbtn =
-                                //             Icons.play_circle_filled_outlined;
-                                //         isplaying = true;
-                                //         assetsAudioPlayer.playOrPause();
-                                //       });
-                                //     } else {
-                                //       setState(() {
-                                //         playbtn = Icons.pause_circle_outlined;
-                                //         isplaying = false;
-                                //         assetsAudioPlayer.playOrPause();
-                                //       });
-                                //     }
-                                //   },
-
-                                //   child: Icon(
-                                //     playbtn,
-                                //     size: 60,
-                                //     color: Colors.white,
-                                //   ),
-                                // ),
                                 SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * 0.09,

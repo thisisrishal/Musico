@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:musico_scratch/custom/customTexts.dart';
+import 'package:musico_scratch/main_page/widgets/customTexts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ScreenSettings extends StatefulWidget {

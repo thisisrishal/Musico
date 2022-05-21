@@ -2,19 +2,19 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marquee/marquee.dart';
-import 'package:musico_scratch/custom/customTexts.dart';
-import 'package:musico_scratch/new%202/NowPlaying.dart';
+import 'package:musico_scratch/main_page/widgets/customTexts.dart';
+import 'package:musico_scratch/main_page/NowPlaying.dart';
 import 'package:musico_scratch/presentation/settings/ScreenSettings.dart';
-import 'package:musico_scratch/openAssetAudio/play_song.dart';
+import 'package:musico_scratch/main_page/widgets/play_song.dart';
 import 'package:musico_scratch/presentation/artists/artists.dart';
 import 'package:musico_scratch/presentation/playlists/playlists.dart';
 import 'package:musico_scratch/presentation/songs/songs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:swipe_to/swipe_to.dart';
-
 import '../presentation/folders/folders.dart';
-import '../presentation/new 2/screenSearch.dart';
+import '../presentation/search/screenSearch.dart';
+
 
 class HomeTab extends StatefulWidget {
   const HomeTab({Key? key}) : super(key: key);
@@ -252,6 +252,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
   }
 
   void _handleTabSelection() {
-    setState(() {});
+    setState(() {}
+    );
   }
 }

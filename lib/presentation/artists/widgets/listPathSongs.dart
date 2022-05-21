@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
-import 'package:musico_scratch/new%202/NowPlaying.dart';
+import 'package:musico_scratch/main_page/NowPlaying.dart';
 import 'package:musico_scratch/presentation/songs/songs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 

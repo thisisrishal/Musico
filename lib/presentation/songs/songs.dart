@@ -1,9 +1,9 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
-import 'package:musico_scratch/moved/MusicListMenu.dart';
-import 'package:musico_scratch/new%202/NowPlaying.dart';
-import 'package:musico_scratch/openAssetAudio/play_song.dart';
+import 'package:musico_scratch/presentation/songs/widgets/MusicListMenu.dart';
+import 'package:musico_scratch/main_page/NowPlaying.dart';
+import 'package:musico_scratch/main_page/widgets/play_song.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class ScreenSongHome extends StatelessWidget {

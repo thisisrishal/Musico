@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:musico_scratch/custom/customTexts.dart';
-import 'package:musico_scratch/custom/listPathSongs.dart';
+import 'package:musico_scratch/main_page/widgets/customTexts.dart';
 import 'package:musico_scratch/presentation/songs/songs.dart';
+
+import '../artists/widgets/listPathSongs.dart';
 
 class ScreenAlbums extends StatefulWidget {
   const ScreenAlbums({Key? key}) : super(key: key);

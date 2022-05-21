@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musico_scratch/custom/createPlaylistDialogue.dart';
-import 'package:musico_scratch/custom/editPlaylist.dart';
-import 'package:musico_scratch/custom/listFavouriteSongs.dart';
-import 'package:musico_scratch/custom/listOfPlaylist.dart';
+import 'package:musico_scratch/presentation/playlists/widgets/createPlaylistDialogue.dart';
+import 'package:musico_scratch/presentation/playlists/widgets/editPlaylist.dart';
+import 'package:musico_scratch/presentation/playlists/widgets/listFavouriteSongs.dart';
+import 'package:musico_scratch/presentation/playlists/widgets/listOfPlaylist.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
-import 'package:musico_scratch/new%202/PlaylistSongs.dart';
+import 'package:musico_scratch/presentation/playlists/widgets/PlaylistSongs.dart';
 
 class ScreenPlaylists extends StatelessWidget {
   ScreenPlaylists({Key? key}) : super(key: key);
@@ -31,27 +31,6 @@ class ScreenPlaylists extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 1,
         child: Stack(
           children: [
-            //     Positioned(
-            //   bottom: 90,
-            //   right: 20,
-            //   child: Container(
-            //     width: 55,
-            //     height: 55,
-            //     decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.all(
-            //           Radius.circular(30),
-            //         ),
-            //         color: Colors.grey[700]),
-            //     child: IconButton(
-            //       icon: Icon(Icons.add),
-            //       color: Colors.white,
-            //       onPressed: () => showDialog(
-            //         context: context,
-            //         builder: (context) => createPlaylistDialogue(),
-            //       ),
-            //     ),
-            //   ),
-            // ),
             SingleChildScrollView(
               child: Wrap(
                 children: [
@@ -164,8 +143,8 @@ class ScreenPlaylists extends StatelessWidget {
                                               // box1.delete(playlists[index]);
 
                                               //? setState(() {
-                                                // playlists = box1.keys.toList();
-                                                playlists = box.keys.toList();
+                                              // playlists = box1.keys.toList();
+                                              playlists = box.keys.toList();
                                               //? });
                                             }
                                           },

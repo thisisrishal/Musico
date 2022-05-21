@@ -2,8 +2,8 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
-import 'package:musico_scratch/new%202/NowPlaying.dart';
-import 'package:musico_scratch/openAssetAudio/play_song.dart';
+import 'package:musico_scratch/main_page/NowPlaying.dart';
+import 'package:musico_scratch/main_page/widgets/play_song.dart';
 import 'package:musico_scratch/presentation/songs/songs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -132,32 +132,7 @@ class _listFavouriteSongsState extends State<listFavouriteSongs> {
                                   }
                                 },
                               ),
-                              // trailing:  getfavouriteSongs
-                              //                 .where((element) =>
-                              //                     element.id.toString() == allSongs[index].id.toString())
-                              //                 .isEmpty
-                              //             ? IconButton(
-                              //                 onPressed: () async {
-                              //                   playlistSongs.add(SongsList[index]);
-                              //                   await box.put(widget.playListName, playlistSongs);
-
-                              //                   setState(() {});
-                              //                 },
-                              //                 icon: const Icon(Icons.add))
-                              //             : IconButton(
-                              //                 onPressed: () async {
-                              //                   playlistSongs.removeWhere((elemet) =>
-                              //                       elemet.id.toString() == SongsList[index].id.toString());
-
-                              //                   await box.put(widget.playListName, playlistSongs);
-                              //                   setState(() {});
-                              //                 },
-                              //                 icon: const Icon(Icons.check_box),
-                              //               ),,
-                              // Text(
-                              //   'getfavouriteSongs[index].title.toString()${index + 1}',
-                              //   style: TextStyle(color: Colors.white),
-                              // ),
+                              
                             ),
                           );
                         },

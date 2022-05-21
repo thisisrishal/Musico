@@ -1,10 +1,9 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
-import 'package:musico_scratch/custom/customMade.dart';
 import 'package:musico_scratch/presentation/songs/songs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-import '../../new 2/NowPlaying.dart';
+import '../../main_page/NowPlaying.dart';
 
 class ScreenSearch extends StatefulWidget {
   ScreenSearch({Key? key}) : super(key: key);
@@ -43,7 +42,7 @@ class _ScreenSearchState extends State<ScreenSearch> {
         return false;
       }
     }).toList();
-    Set<Audio> searchResultsSet = {}; 
+    Set<Audio> searchResultsSet = {};
     List<Audio> searchResults = [];
     if (searchTitle.isNotEmpty) {
       searchResultsSet = searchTitle.toSet();
@@ -51,13 +50,13 @@ class _ScreenSearchState extends State<ScreenSearch> {
       searchResultsSet = searchArtist.toSet();
     }
     searchResults = searchResultsSet.toList()
-    //  else if (searchAlbum.isNotEmpty) {
-    //   searchResults = searchAlbum;
-    // }
-    // else {
-    //   searchResults = searchResults.isEmpty;
-    // }
-    ;
+        //  else if (searchAlbum.isNotEmpty) {
+        //   searchResults = searchAlbum;
+        // }
+        // else {
+        //   searchResults = searchResults.isEmpty;
+        // }
+        ;
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
@@ -120,7 +119,9 @@ class _ScreenSearchState extends State<ScreenSearch> {
                 )
               ],
             ),
-            customDivider(),
+            const Divider(
+              color: Colors.white54,
+            ),
             Expanded(
                 child: search.isNotEmpty
                     ? searchResults.isNotEmpty
@@ -152,11 +153,12 @@ class _ScreenSearchState extends State<ScreenSearch> {
                                                 MaterialPageRoute(
                                                   builder: ((context) {
                                                     return NowPlaying(
-                                                      
                                                       songList: searchResults,
-                                                      songId: searchResults[index].metas
-                                                          .id
-                                                          .toString(),
+                                                      songId:
+                                                          searchResults[index]
+                                                              .metas
+                                                              .id
+                                                              .toString(),
                                                     );
                                                   }),
                                                 ),

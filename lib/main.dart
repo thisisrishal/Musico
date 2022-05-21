@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musico_scratch/core/constants.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:musico_scratch/new%202/SplashScreen.dart';
+import 'package:musico_scratch/logic/cubit/fav_cubit.dart';
+import 'package:musico_scratch/main_page/SplashScreen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'logic/bloc/song/song_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // binded to the flutter engine
@@ -47,17 +49,22 @@ class Musico extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Musico',
-      theme: ThemeData(
-        fontFamily: 'futura',
-        textTheme: Theme.of(context).textTheme.apply(
-              bodyColor: Color.fromARGB(255, 241, 241, 242),
-              displayColor: Colors.grey[500],
-            ),
-      ),
-      home: const SplashScreen(),
-    );
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => FavCubit()),
+          BlocProvider(create: (context) => SongBloc()),
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Musico',
+          theme: ThemeData(
+            fontFamily: 'futura',
+            textTheme: Theme.of(context).textTheme.apply(
+                  bodyColor: Color.fromARGB(255, 241, 241, 242),
+                  displayColor: Colors.grey[500],
+                ),
+          ),
+          home: const SplashScreen(),
+        ));
   }
 }

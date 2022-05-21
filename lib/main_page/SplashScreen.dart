@@ -1,7 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
-import 'package:musico_scratch/main_page/TabBar.dart';
+import 'package:musico_scratch/main_page/home_tab.dart';
 import 'package:musico_scratch/presentation/songs/songs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -86,7 +86,7 @@ class _SplashScreenState extends State<SplashScreen> {
       );
     } 
     
-    setState(() {});
+    ;
   }
 
   navigate() async {

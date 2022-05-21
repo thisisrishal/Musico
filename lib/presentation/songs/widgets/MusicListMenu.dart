@@ -3,7 +3,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
-import 'package:musico_scratch/moved/addToPlaylist.dart';
+import 'package:musico_scratch/presentation/playlists/widgets/addToPlaylist.dart';
 
 class MusicListMenu extends StatefulWidget {
   final String songId;

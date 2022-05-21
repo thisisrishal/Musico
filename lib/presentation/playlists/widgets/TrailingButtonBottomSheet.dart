@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:musico_scratch/new%202/PlaylistSongs.dart';
+import 'package:musico_scratch/presentation/playlists/widgets/PlaylistSongs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-import '../database/dbSongs.dart';
-import '../presentation/songs/songs.dart';
+import '../../../database/dbSongs.dart';
+import '../../songs/songs.dart';
 
 bool rebuild = false;
 
@@ -106,46 +106,7 @@ class _TrailingButtonBottomsheetState extends State<TrailingButtonBottomsheet> {
                 icon: const Icon(Icons.check_box),
               ),
 
-        //  InkWell(
-        //     onTap: (() {
-
-        //         tick = true;
-        //       setState(() {
-
-        //       });
-
-        //     }),
-        //     child: tick == true
-        //         ? Container(
-        //             height: 30,
-        //             width: 30,
-        //             color: Colors.red,
-        //           )
-        //         : Container(
-        //             height: 30,
-        //             width: 30,
-        //             color: Colors.green,
-        //           )),
-
-        //     IconButton(
-        //   onPressed: () {
-        //     print(SongsList[index]);
-
-        //     playlistSongs.add(SongsList[index]);
-
-        //      setState(() {});
-        //     // Navigator.push(
-        //     //     context,
-        //     //     MaterialPageRoute(
-        //     //         builder: (context) => PlaylistSongs(
-        //     //               songIndex: index,
-        //     //             )));
-        //     print(index);
-        //     // return bottomSheet(context);
-        //   },
-        //   icon: Icon(Icons.more_horiz_rounded),
-        //   color: Colors.white,
-        // ),
+      
       ),
       itemCount: recievedDatabaseSongs.length,
     );

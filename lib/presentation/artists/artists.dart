@@ -1,7 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
-import 'package:musico_scratch/custom/customTexts.dart';
-import 'package:musico_scratch/custom/listArtistSongs.dart';
+import 'package:musico_scratch/main_page/widgets/customTexts.dart';
+import 'package:musico_scratch/presentation/artists/widgets/listArtistSongs.dart';
 import 'package:musico_scratch/presentation/songs/songs.dart';
 
 class ScreenArtists extends StatelessWidget {

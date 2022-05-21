@@ -3,16 +3,14 @@ import 'dart:async';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musico_scratch/custom/TrailingButtonBottomSheet.dart';
-// import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musico_scratch/custom/songSheet.dart';
+import 'package:musico_scratch/presentation/playlists/widgets/TrailingButtonBottomSheet.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
-import 'package:musico_scratch/moved/playlistNowPlaying.dart';
-import 'package:musico_scratch/openAssetAudio/play_song.dart';
+import 'package:musico_scratch/presentation/playlists/widgets/playlistNowPlaying.dart';
+import 'package:musico_scratch/main_page/widgets/play_song.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-import '../presentation/songs/songs.dart';
-import '../../custom/editPlaylist.dart';
+import '../../songs/songs.dart';
+import 'editPlaylist.dart';
 
 // showModalBottomSheet(
 //                       shape: RoundedRectangleBorder(
@@ -61,12 +59,6 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
   void initState() {
     super.initState();
 
-    // _now = DateTime.now().hour.toString();
-    // _everySecond = Timer.periodic(Duration(hours: 1), (Timer t) {
-    //   setState(() {
-    //     _now = DateTime.now().hour.toString();
-    //   });
-    // });
     fullSongs();
   }
 
@@ -227,46 +219,6 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
                                             icon: const Icon(Icons.check_box),
                                           ),
 
-                                    //  InkWell(
-                                    //     onTap: (() {
-
-                                    //         tick = true;
-                                    //       setState(() {
-
-                                    //       });
-
-                                    //     }),
-                                    //     child: tick == true
-                                    //         ? Container(
-                                    //             height: 30,
-                                    //             width: 30,
-                                    //             color: Colors.red,
-                                    //           )
-                                    //         : Container(
-                                    //             height: 30,
-                                    //             width: 30,
-                                    //             color: Colors.green,
-                                    //           )),
-
-                                    //     IconButton(
-                                    //   onPressed: () {
-                                    //     print(SongsList[index]);
-
-                                    //     playlistSongs.add(SongsList[index]);
-
-                                    //      setState(() {});
-                                    //     // Navigator.push(
-                                    //     //     context,
-                                    //     //     MaterialPageRoute(
-                                    //     //         builder: (context) => PlaylistSongs(
-                                    //     //               songIndex: index,
-                                    //     //             )));
-                                    //     print(index);
-                                    //     // return bottomSheet(context);
-                                    //   },
-                                    //   icon: Icon(Icons.more_horiz_rounded),
-                                    //   color: Colors.white,
-                                    // ),
                                   ),
                                   itemCount: recievedDatabaseSongs.length,
                                 );
