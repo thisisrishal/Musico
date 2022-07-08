@@ -24,6 +24,7 @@ class _ScreenAlbumsState extends State<ScreenAlbums> {
   Widget build(BuildContext context) {
     
     return Scaffold(
+    
       body: Container(
         color: Colors.black,
         child: ListView.builder(itemBuilder: (context, index) 

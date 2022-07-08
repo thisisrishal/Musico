@@ -23,7 +23,6 @@ class HomeTab extends StatefulWidget {
   State<HomeTab> createState() => _HomeTabState();
 }
 
-// for Tab Bar  using multiple inheritence(mixin)
 
 class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
   late TabController _tabController;
@@ -35,10 +34,9 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
 
     _tabController = TabController(length: 4, vsync: this);
 
-    //to change the tab bar
-    _tabController.addListener(_handleTabSelection);
+    // _tabController.addListener(_handleTabSelection);
 
-    requestPermission();
+    // requestPermission();
   }
 
   @override
@@ -102,10 +100,8 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
           height: 60,
           child:
 
-              //using builderCurrent take the current playing Audio
               assetsAudioPlayer.builderCurrent(
             builder: (BuildContext context, Playing? playing) {
-              //  got the current playing audio in "databaseAudioList"
               final currentPlayingAudio =
                   find(databaseAudioList, playing!.audio.assetAudioPath);
 
@@ -164,10 +160,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                                   width: 300,
                                   child: Marquee(
                                     text: currentPlayingAudio.metas.title!,
-                                    // Text(
-                                    //   currentPlayingAudio.metas.title!,
-                                    //   maxLines: 1,
-                                    //   overflow: TextOverflow.ellipsis,
+                                  
                                     style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w800),
@@ -244,15 +237,10 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
     );
   }
 
-  void requestPermission() async {
-    var requestStatus = await Permission.storage.status;
-    if (requestStatus.isDenied) {
-      Permission.storage.request();
-    }
-  }
 
-  void _handleTabSelection() {
-    setState(() {}
-    );
-  }
+
+//   void _handleTabSelection() {
+//     setState(() {}
+//     );
+//   }
 }

@@ -34,5 +34,5 @@ final assetsAudioPlayer = AssetsAudioPlayer.withId("0");
 // Take the list and take playing  audio with that list
 // and return the audio that in list
 Audio find(List<Audio> source, String fromPath) {
-  return source.firstWhere((element) => element.path == fromPath);
+  return source.firstWhere((element) => element.path == fromPath );
 }

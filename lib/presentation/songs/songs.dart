@@ -20,20 +20,13 @@ class ScreenSongHome extends StatelessWidget {
         // SongModel comes from  on_audio_query
 
         future: _audioQuery.querySongs(
-          // to fetch songs querySongs
           sortType: SongSortType.DATE_ADDED,
           orderType: OrderType.ASC_OR_SMALLER,
           uriType: UriType.EXTERNAL,
           ignoreCase: true,
         ),
         builder: (context, item) {
-          // print('--------------{$context  } ------${item} ---------');
-
-          // here item is the index one_by_one song get her1
-
           if (item.data == null) {
-            // Data is the last value/song get in item
-
             return Center(
               child: CircularProgressIndicator(),
             );
@@ -53,7 +46,6 @@ class ScreenSongHome extends StatelessWidget {
               onTap: () {
                 OpenPlayer(fullSongs: databaseAudioList, index: index)
                     .openAssetPlayer(index: index, songs: databaseAudioList);
-
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -73,10 +65,17 @@ class ScreenSongHome extends StatelessWidget {
                   artworkBorder: BorderRadius.all(Radius.circular(7)),
                   artworkFit: BoxFit.fill,
                   nullArtworkWidget: Container(
-                      child: Image.asset(
-                    'assets/images/7461e3b8cc4ec795203213c851932faa.jpg',
-                    color: Colors.white30,
-                  )),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      color: Color(0xff404040),
+                    ),
+                    height: 45,
+                    width: 45,
+                    child: Icon(
+                      Icons.music_note_outlined,
+                      color: Colors.white60,
+                    ),
+                  ),
                   id: int.parse(allSongs[index].id.toString()),
                   type: ArtworkType.AUDIO,
                 ),

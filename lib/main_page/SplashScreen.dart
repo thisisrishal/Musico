@@ -4,6 +4,7 @@ import 'package:musico_scratch/database/dbSongs.dart';
 import 'package:musico_scratch/main_page/home_tab.dart';
 import 'package:musico_scratch/presentation/songs/songs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -15,11 +16,15 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
+    // requestPermission();
+    // Permission.storage.request();
+    requestPermission();
+
+    // fetchsongs();
+
     super.initState();
 
-    fetchsongs();
     fetchArtist();
-    navigate();
   }
 
   final _audioQuery = new OnAudioQuery();
@@ -39,6 +44,16 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
+  void requestPermission() async {
+    var requestStatus = await Permission.storage.request();
+    if (requestStatus.isDenied) {
+      // print('++++++++++++++++++++++++++');
+      requestPermission();
+    } else if (requestStatus.isGranted) {
+      fetchsongs();
+    }
+  }
+
 //fetch all Artist
   void fetchArtist() async {
     List<ArtistModel> fetchallArtists = await _audioQuery.queryArtists();
@@ -51,7 +66,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
 //fetch all songs
   fetchsongs() async {
+    // print('***********444***********');
+
     fetchedSongs = await _audioQuery.querySongs();
+    // print('***********777***********');
 
 // return all mp3 Songs;
     for (var song in fetchedSongs) {
@@ -72,6 +90,7 @@ class _SplashScreenState extends State<SplashScreen> {
       );
     }).toList();
 
+    // navigate();
     await box.put('musics', mappedSongs);
     recievedDatabaseSongs = box.get('musics') as List<dbSongs>;
 
@@ -84,13 +103,13 @@ class _SplashScreenState extends State<SplashScreen> {
                 artist: element.artist,
                 id: element.id.toString())),
       );
-    } 
-    
-    ;
+    }
+    navigate();
   }
 
   navigate() async {
-    await Future.delayed(const Duration(seconds: 3));
+    // print('**********************');
+    await Future.delayed(const Duration(seconds: 5));
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(

@@ -1,4 +1,3 @@
-
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +27,6 @@ class _NowPlayingState extends State<NowPlaying> {
   List<dbSongs> databaseSongs = [];
   List<dynamic>? favSongs = [];
 
-  //default pause
   IconData playbtn = Icons.pause_circle_outline_rounded;
 
   bool isplaying = false;
@@ -113,8 +111,21 @@ class _NowPlayingState extends State<NowPlaying> {
 
                                 // artworkClipBehavior: Clip.antiAliasWithSaveLayer,
                                 artworkFit: BoxFit.cover,
-                                nullArtworkWidget:
-                                    Image.asset('assets/images/muzify.png'),
+                                nullArtworkWidget: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                    color: Color(0xff404040),
+                                  ),
+                                  height: 45,
+                                  width: 45,
+                                  child: Icon(
+                                    Icons.music_note_outlined,
+                                    size: MediaQuery.of(context).size.width *
+                                        0.35,
+                                    color: Colors.white60,
+                                  ),
+                                ),
                                 id: int.parse(myaudio.metas.id!),
                                 type: ArtworkType.AUDIO,
                               ),

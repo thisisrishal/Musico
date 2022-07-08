@@ -7,6 +7,7 @@ import 'package:musico_scratch/main_page/NowPlaying.dart';
 import 'package:musico_scratch/presentation/songs/songs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
+import '../../../main_page/widgets/play_song.dart';
 
 class listArtistsongs extends StatefulWidget {
   final int newIndex;
@@ -46,86 +47,75 @@ class _listFavouriteSongsState extends State<listArtistsongs> {
                 Set<Audio> allArtistSongsAudio = {};
 
                 List<Audio> allArtistSongs = [];
+
+                // print('***********777***********');
+
                 for (var song in databaseAudioList) {
                   if (song.metas.artist == allArtists[widget.newIndex].artist) {
-                    allArtistSongsAudio.add(Audio.file(
-                      song.metas.artist.toString(),
-                      metas: Metas(
-                        title: song.metas.title,
-                        artist: song.metas.artist,
-                        id: song.metas.id.toString(),
-                      ),
-                    ));
+                    allArtistSongsAudio.add(song);
                   }
                 }
+                // List<SongModel> allArtistsSongsSongModel = [];
+
+                // for (var song in fetchedSongs) {
+                //   if (song.artist == allArtists[widget.newIndex].artist) {
+                //     allArtistsSongsSongModel.add(song);
+                //     print('printiiiiiiiiiiiiiiiiiii');
+                //     print(song);
+                //   }
+                // }
                 allArtistSongs = allArtistSongsAudio.toList();
+
+                List<SongModel> artistsongModel = [];
 
                 return ListView.builder(
                   itemBuilder: (context, index) {
                     return GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: ((context) => NowPlaying(
-                                songList: databaseAudioList,
+                        onTap: () {
+                          OpenPlayer(fullSongs: allArtistSongs, index: index)
+                              .openAssetPlayer(
+                                  index: index, songs: allArtistSongs);
+
+                          Future.delayed(Duration(seconds: 5));
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NowPlaying(
+                                songList: allArtistSongs,
                                 songId: allSongs[index].id.toString(),
+                              ),
+                            ),
+                          );
+                        },
+                        child: ListTile(
+                          leading: Container(
+                            height: 43,
+                            width: 43,
+                            child: QueryArtworkWidget(
+                              artworkBorder:
+                                  BorderRadius.all(Radius.circular(7)),
+                              artworkFit: BoxFit.cover,
+                              nullArtworkWidget: Container(
+                                  child: Image.asset(
+                                'assets/images/musical-note (1).png',
+                                color: Colors.white30,
                               )),
-                        ),
-                      ),
-                      child: ListTile(
-                        leading: Container(
-                          height: 43,
-                          width: 43,
-                          child: QueryArtworkWidget(
-                            artworkBorder: BorderRadius.all(Radius.circular(7)),
-                            artworkFit: BoxFit.cover,
-                            nullArtworkWidget: Container(
-                                child: Image.asset(
-                              'assets/images/7461e3b8cc4ec795203213c851932faa.jpg',
-                              color: Colors.white30,
-                            )),
-                            id: int.parse(allArtists[index].id.toString()),
-                            type: ArtworkType.AUDIO,
+                              id: int.parse(
+                                  allArtistSongs[index].metas.id.toString()),
+                              type: ArtworkType.AUDIO,
+                            ),
                           ),
-                        ),
-                        title: SizedBox(
-                          width: 200,
-                          height: 40,
-                          child: Text(
+                          title: Text(
                             allArtistSongs[index].metas.title.toString(),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
-                        ),
-                        subtitle: Text(
-                          allArtistSongs[index].metas.title.toString(),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        trailing: PopupMenuButton(
-                          icon: Icon(
-                            Icons.more_vert_outlined,
-                            color: Colors.white,
+                          subtitle: Text(
+                            allArtistSongs[index].metas.title.toString(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          itemBuilder: (BuildContext context) => [
-                            const PopupMenuItem(
-                              value: "1",
-                              child: Text(
-                                "Remove song",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                          ],
-                          onSelected: (value) {
-                            if (value == "1") {
-                              setState(() {});
-                            }
-                          },
-                        ),
-                      ),
-                    );
+                        ));
                   },
                   itemCount: allArtistSongs.length,
                 );

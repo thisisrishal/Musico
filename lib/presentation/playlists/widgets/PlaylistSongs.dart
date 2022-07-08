@@ -1,12 +1,10 @@
-import 'dart:async';
-
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:musico_scratch/presentation/playlists/widgets/TrailingButtonBottomSheet.dart';
 import 'package:musico_scratch/database/dbSongs.dart';
-import 'package:musico_scratch/presentation/playlists/widgets/playlistNowPlaying.dart';
 import 'package:musico_scratch/main_page/widgets/play_song.dart';
+import 'package:musico_scratch/presentation/playlists/widgets/playlistNowPlaying.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 import '../../songs/songs.dart';
@@ -218,7 +216,6 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
                                             },
                                             icon: const Icon(Icons.check_box),
                                           ),
-
                                   ),
                                   itemCount: recievedDatabaseSongs.length,
                                 );
@@ -299,14 +296,7 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
                     //                 ),
                     //               );
 
-                    // //   Navigator.push(
-                    // //     context,
-                    // //     MaterialPageRoute(
-                    // //       builder: ((context) {
-                    // //         return playlistNowPlaying(index: index, allSongs:playPlaylist )
-
-                    // //   // openPlayer(audios, index);
-                    // // },
+                   
                     // Navigator.push(context, MaterialPageRoute(builder: (context){return playlistNowPlaying(index: index, allSongs: playPlaylist);}
                     // )
 
@@ -323,10 +313,17 @@ class _PlaylistSongsState extends State<PlaylistSongs> {
                         // artworkClipBehavior: Clip.antiAliasWithSaveLayer,
                         artworkFit: BoxFit.fill,
                         nullArtworkWidget: Container(
-                            child: Image.asset(
-                          'assets/images/7461e3b8cc4ec795203213c851932faa.jpg',
-                          color: Colors.white30,
-                        )),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            color: Color(0xff404040),
+                          ),
+                          height: 45,
+                          width: 45,
+                          child: Icon(
+                            Icons.music_note_outlined,
+                            color: Colors.white60,
+                          ),
+                        ),
                         id: int.parse(playlistSongs[index].id.toString()),
                         type: ArtworkType.AUDIO,
                       ),

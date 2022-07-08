@@ -34,7 +34,6 @@ class _NowPlayingState extends State<playlistNowPlaying> {
     //print('audioSessionId : $sessionId');
     // }));
     openPlayer();
-    
   }
 
   void openPlayer() async {
@@ -46,8 +45,6 @@ class _NowPlayingState extends State<playlistNowPlaying> {
         playInBackground: PlayInBackground.enabled,
         notificationSettings: NotificationSettings(stopEnabled: false));
   }
-
- 
 
   bool isplaying = false;
   IconData playbtn = Icons.pause_circle_outline_rounded;
@@ -64,7 +61,7 @@ class _NowPlayingState extends State<playlistNowPlaying> {
           },
           icon: const Icon(Icons.arrow_drop_down),
         ),
-        backgroundColor: const Color.fromARGB(255, 24, 3, 18),
+        backgroundColor: Colors.black,
         centerTitle: true,
         title: const Text(
           'Now Playing',
@@ -78,12 +75,7 @@ class _NowPlayingState extends State<playlistNowPlaying> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(colors: [
-            Color.fromARGB(255, 24, 3, 18),
-            Color.fromARGB(255, 130, 134, 135)
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-        ),
+        decoration: const BoxDecoration(color: Colors.black),
         child: Column(
           children: [
             StreamBuilder<Playing?>(
@@ -108,8 +100,19 @@ class _NowPlayingState extends State<playlistNowPlaying> {
                           child: QueryArtworkWidget(
                             // artworkClipBehavior: Clip.antiAliasWithSaveLayer,
                             artworkFit: BoxFit.fill,
-                            nullArtworkWidget:
-                                Image.asset('assets/images/7461e3b8cc4ec795203213c851932faa.jpg'),
+                            nullArtworkWidget: Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                                color: Color(0xff404040),
+                              ),
+                              height: 45,
+                              width: 45,
+                              child: Icon(
+                                Icons.music_note_outlined,
+                                color: Colors.white60,
+                              ),
+                            ),
                             id: int.parse(myaudio.metas.id!),
                             type: ArtworkType.AUDIO,
                           ),
@@ -199,11 +202,11 @@ class _NowPlayingState extends State<playlistNowPlaying> {
                                                 Icons.pause_circle_outlined
                                             : playbtn = Icons
                                                 .play_circle_filled_outlined,
+                                        color: Colors.white,
                                       ),
                                     );
                                   },
                                 ),
-
                                 SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * 0.09,

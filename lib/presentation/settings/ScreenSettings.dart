@@ -56,43 +56,41 @@ class _ScreenSettingsState extends State<ScreenSettings> {
                   padding: const EdgeInsets.only(top: 8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    // mainAxisSize: MainAxisSize.min,
+                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                        child: SwitchListTile(
-                          title: const Text('Notifications',
-                              style: TextStyle(
-                                fontSize: 25,
-                              )),
-                          secondary: const Icon(
-                            FontAwesomeIcons.solidBell,
-                          ),
-                          value: _toggled,
-                          onChanged: (bool value) {
-                            setState(() {
-                              _toggled = value;
-                              saveSwitchState(value);
-                              if (_toggled == true) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                      'App need to Restart to see the Changes',
-                                      style: TextStyle(),
-                                    ),
+                      SwitchListTile(
+                        contentPadding: EdgeInsets.all(0),
+                        title: const Text('Notifications',
+                            style: TextStyle(
+                              fontSize: 25,
+                            )),
+                       
+                        value: _toggled,
+                        onChanged: (bool value) {
+                          setState(() {
+                            _toggled = value;
+                            saveSwitchState(value);
+                            if (_toggled == true) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    'App need to Restart to see the Changes',
+                                    style: TextStyle(),
                                   ),
-                                );
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                      'App need to Restart to see the Changes',
-                                    ),
+                                ),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    'App need to Restart to see the Changes',
                                   ),
-                                );
-                              }
-                            });
-                          },
-                        ),
+                                ),
+                              );
+                            }
+                          });
+                        },
                       ),
                       // TextButton(onPressed: (){}, child:Column(
                       //   children: [

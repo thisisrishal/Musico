@@ -1,4 +1,3 @@
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:musico_scratch/main_page/widgets/customTexts.dart';
 import 'package:musico_scratch/presentation/artists/widgets/listArtistSongs.dart';
@@ -12,8 +11,6 @@ class ScreenArtists extends StatelessWidget {
     return ListView.builder(
         itemCount: allArtists.length,
         itemBuilder: (context, index) {
-          // return
-          // Container(color: Colors.white,height: 19,width: 40,);
           return ListTile(
             onTap: () {
               Navigator.push(
@@ -35,30 +32,3 @@ class ScreenArtists extends StatelessWidget {
         });
   }
 }
-          
-
-    // ListView(
-    //   children: [
-    //     ListTile(
-    //       title: normalText('Kadhar'),
-    //       trailing: Icon(
-    //         Icons.navigate_next,
-    //         color: Colors.white,
-    //       ),
-    //     ),
-    //     ListTile(
-    //       title: normalText('Ed Sheeran'),
-    //       trailing: Icon(
-    //         Icons.navigate_next,
-    //         color: Colors.white,
-    //       ),
-    //     ),
-    //     ListTile(
-    //       title: normalText('Unknown'),
-    //       trailing: Icon(
-    //         Icons.navigate_next,
-    //         color: Colors.white,
-    //       ),
-    //     ),
-    //   ],
-    // );

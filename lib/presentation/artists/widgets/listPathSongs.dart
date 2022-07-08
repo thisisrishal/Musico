@@ -1,9 +1,10 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
-import 'package:musico_scratch/database/dbSongs.dart';
 import 'package:musico_scratch/main_page/NowPlaying.dart';
 import 'package:musico_scratch/presentation/songs/songs.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
+import '../../../main_page/widgets/play_song.dart';
 
 class listPathSongs extends StatefulWidget {
   final int index;
@@ -22,92 +23,67 @@ class _listPathSongsState extends State<listPathSongs> {
 
   @override
   Widget build(BuildContext context) {
-    // List<String> pathList;
-    List<String> _getSplitPath = [];
-// List<String> gotPathnew = [];
+    Set<Audio> folderSongSet = {};
+    List<Audio> folderSongList = [];
 
-    // String path = '';
+    // // List<String> pathList;
+    List<String> _SplittedPath = [];
+    // List<Audio> newList = [];
 
-    // for (var i = 0; i < allSongs.length; i++) {
-    //   path = allSongs[i].data;
-    //   List<String> _getSplitPath;
-    //   _getSplitPath = path.split('/');
-    //   gotPathnew.add(_getSplitPath[_getSplitPath.length - 2]);
-    // }
-    // gotPathnew = gotPathset.toList();
-    // print('========pth=========${gotPathnew}========================');
-
-// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\?
-    // allSongs.forEach((element1) {
-    //   String _path = element1.data.toString();
-    //   _getSplitPath = _path.split('/').toList();
-
-    //   if (_getSplitPath[_getSplitPath.length - 2] == gotPath[widget.index]) {
-    //        print(
-    //         '===========_getSplitPath.length - 2================${_getSplitPath[_getSplitPath.length - 2]}=======================');
-    //     print(
-    //         '===========gotPath[widget.index]================${gotPath[widget.index]}=======================');
-
-    //     print(
-    //         '===========element================${element1.id}=======================');
-    //          print(
-    //         '===========next=======================================');
-    //     pathSongList.add(element1);
-    //   }
-    // }
-    // );
-    // \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\?
-
-    // print(
-    //     '===========ererererer================${pathSongList.length}=======================');
-    // pathSongList = pathSongListset.toList();
-    // Set<SongModel> setnew1 = {};
-    // pathSongList.firstWhere((element) {
-    //   return
-    // });
-    print(
-        '===========allsongs================${fetchedSongs.length}=======================');
-    for (var i = 1; i < allSongs.length; i++) {
+    for (var i = 0; i < allSongs.length; i++) {
       String _path = allSongs[i].data.toString();
-      _getSplitPath = _path.split('/').toList();
+      _SplittedPath = _path.split('/').toList();
 
-      if (_getSplitPath[_getSplitPath.length - 2] == gotPath[widget.index]) {
+      if (_SplittedPath[_SplittedPath.length - 2] == gotPath[widget.index]) {
         print(
-            '===========_getSplitPath.length - 2================${_getSplitPath[_getSplitPath.length - 2]}=======================');
+            '${_SplittedPath[_SplittedPath.length - 2]}==========================> ${gotPath[widget.index]}');
 
-        print(
-            '===========gotPath[widget.index]================${gotPath[widget.index]}=======================');
-
-        print(
-            '===========element================${allSongs[i].id}=======================');
-        print('===========next=======================================');
-        pathSongList.add(allSongs[i]);
+        for (int j = 0; j < databaseAudioList.length; j++) {
+          if (databaseAudioList[j].metas.id.toString() ==
+              allSongs[i].id.toString()) {
+            print('kittiyedaaaaaaaaaaaaaa');
+            folderSongSet.add(databaseAudioList[j]);
+          }
+        }
       }
     }
+    print('folderSongSet: ${folderSongSet.length}');
+    print(folderSongSet);
+
+    folderSongList = folderSongSet.toList();
+
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Text(
+          gotPath[widget.index],
+        ),
+        elevation: 0.0,
+      ),
       body: SafeArea(
         child: Container(
           child: ListView.builder(
             itemBuilder: (context, index) {
-              // return
-              // ListTile(
-              //   onTap: () {},
-              //   title: Text(pathSongList[index].title),
-              //   // subtitle: Text(index.toString()),
-              // );
-              // newfunction(index);
               return ListTile(
                 title: GestureDetector(
                     onTap: () {
+                      // print('--------------${pathSongList[index]}');
+                      OpenPlayer(fullSongs: folderSongList, index: index)
+                          .openAssetPlayer(index: index, songs: folderSongList);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: ((context) => NowPlaying( songList: databaseAudioList, songId: databaseAudioList[index].metas.id.toString())),
+                          builder: ((context) => NowPlaying(
+                              songList: folderSongList,
+                              songId: databaseAudioList[index]
+                                  .metas
+                                  .id
+                                  .toString())),
                         ),
                       );
                     },
-                    child: Text(pathSongList[index].title)),
+                    child: Text(folderSongList[index].metas.title.toString())),
                 leading: Container(
                   // decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8)),color: Colors.white30,),
                   height: 43,
@@ -119,17 +95,24 @@ class _listPathSongsState extends State<listPathSongs> {
                     // artworkClipBehavior: Clip.antiAliasWithSaveLayer,
                     artworkFit: BoxFit.cover,
                     nullArtworkWidget: Container(
-                        child: Image.asset(
-                      'assets/images/7461e3b8cc4ec795203213c851932faa.jpg',
-                      color: Colors.white30,
-                    )),
-                    id: int.parse(pathSongList[index].id.toString()),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                        color: Color(0xff404040),
+                      ),
+                      height: 45,
+                      width: 45,
+                      child: Icon(
+                        Icons.music_note_outlined,
+                        color: Colors.white60,
+                      ),
+                    ),
+                    id: int.parse(folderSongList[index].metas.id.toString()),
                     type: ArtworkType.AUDIO,
                   ),
                 ),
               );
             },
-            itemCount: (pathSongList.length),
+            itemCount: (folderSongList.length),
           ),
         ),
       ),
@@ -137,6 +120,6 @@ class _listPathSongsState extends State<listPathSongs> {
   }
 
 //   fetchSongs(temp) {
-  Set<SongModel> pathSongListset = {};
+  Set<SongModel> pathSongset = {};
   List<dynamic> pathSongList = [];
 }
